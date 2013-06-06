@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentMatcherTests.cs" />
-    <Compile Include="ArgumentSerializerTests_SerializeToStringArgs.cs" />
+    <Compile Include="Helpers\BooleanParameter.cs" />
+    <Compile Include="Helpers\MultiTypeParameter.cs" />
+    <Compile Include="Helpers\SingleParameter.cs" />
+    <Compile Include="Helpers\TwoParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ArgumentSerializerTests_SerializeToStringOfT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

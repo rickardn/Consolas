@@ -1,5 +1,7 @@
-﻿using System;
+﻿// ReSharper disable InconsistentNaming
+using System;
 using System.Collections.Generic;
+using ConsoleApp.Core.Tests.Helpers;
 using NUnit.Framework;
 using Should;
 
