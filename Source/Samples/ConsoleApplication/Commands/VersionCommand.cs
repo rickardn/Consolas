@@ -1,8 +1,6 @@
-﻿using ConsoleApp.Core;
-
-namespace SampleConsoleApplication.Commands
+﻿namespace SampleConsoleApplication.Commands
 {
-    public class VersionCommand : ICommand
+    public class VersionCommand
     {
         public string Execute(VersionArgs args)
         {

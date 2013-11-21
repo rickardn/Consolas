@@ -33,16 +33,14 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "-Bool", "-String" }, typeof(MultiTypeParameter))]
         public void Match_ShouldMatchExactSignature1(string[] args, Type expectedType)
         {
-            Match(args)
-                   .ShouldEqual(expectedType);
+            Match(args).ShouldEqual(expectedType);
         }
         
         [TestCase(new[] { "-Parameter2", "-Parameter1" }, typeof(TwoParameters))]
         [TestCase(new[] { "-String", "-Bool" }, typeof(MultiTypeParameter))]
         public void Match_ShouldMatchNonDefaultOrder(string[] args, Type expectedType)
         {
-            Match(args)
-                   .ShouldEqual(expectedType);
+            Match(args).ShouldEqual(expectedType);
         }
 
         [TestCase(new[] { "-Parameter2" }, typeof(TwoParameters))]
@@ -51,8 +49,7 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "-Bool" }, typeof(MultiTypeParameter))]
         public void Match_ShouldMatchPartials(string[] args, Type expected)
         {
-            Match(args)
-                   .ShouldEqual(expected);
+            Match(args).ShouldEqual(expected);
         }
 
         [TestCase(new[] { "-Parameter1" }, typeof(TwoParameters))]
@@ -60,15 +57,14 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "--Parameter1" }, typeof(TwoParameters))]
         public void Match_CommandPrefix(string[] args, Type expected)
         {
-            Match(args)
-                   .ShouldEqual(expected);
+            Match(args).ShouldEqual(expected);
         }
 
         [Test]
         public void Match_NoPrefix()
         {
             Match(new[] {"IsTrue"})
-                   .ShouldEqual(typeof(BooleanParameter));
+                .ShouldEqual(typeof(BooleanParameter));
         }
 
         [TestCase(new[] { "-String", "foo" }, typeof(MultiTypeParameter))]
@@ -76,8 +72,7 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "-Bool" }, typeof(MultiTypeParameter))]
         public void Match_MatchesValue(string[] args, Type expected)
         {
-            var match = Match(args);
-            match.ShouldEqual(expected);
+            Match(args).ShouldEqual(expected);
         }
 
         private Type Match(string[] args)
@@ -103,8 +98,7 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "-IsTrue" }, true)]
         public void MatchToObject_MatchesBoolValue(string[] arg, bool expected)
         {
-            var args = arg;
-            var result = matcher.MatchToObject<BooleanParameter>(args);
+            var result = matcher.MatchToObject<BooleanParameter>(arg);
             result.IsTrue.ShouldEqual(expected);
         }
 
@@ -113,8 +107,7 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "-Bool" }, true)]
         public void MatchToObject_MatchesBoolValue2(string[] arg, bool expected)
         {
-            var args = arg;
-            var result = matcher.MatchToObject<MultiTypeParameter>(args);
+            var result = matcher.MatchToObject<MultiTypeParameter>(arg);
             result.Bool.ShouldEqual(expected);
         }
 
@@ -123,8 +116,7 @@ namespace ConsoleApp.Core.Tests
         [TestCase(new[] { "--Bool" }, true)]
         public void MatchToObject_CommandPrefix(string[] arg, bool expected)
         {
-            var args = arg;
-            var result = matcher.MatchToObject<MultiTypeParameter>(args);
+            var result = matcher.MatchToObject<MultiTypeParameter>(arg);
             result.Bool.ShouldEqual(expected);
         }
 

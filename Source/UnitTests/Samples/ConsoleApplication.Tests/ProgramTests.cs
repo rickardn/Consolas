@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ConsoleApp.Core;
 using NUnit.Framework;
 
 namespace SampleConsoleApplication.Tests
@@ -13,10 +13,9 @@ namespace SampleConsoleApplication.Tests
         }
 
         [Test]
-        public void Invalid()
+        public void Default()
         {
-            Assert.Throws<ArgumentException>(() => 
-                Program.Main(new[] {"-Foo"}));
+            Program.Main(new[] {"-Foo"});
         }
     }
 }

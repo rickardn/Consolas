@@ -21,7 +21,7 @@ namespace ConsoleApp.Core
             if (match == null)
                 return null;
 
-            var instance = Activator.CreateInstance(type);
+            var instance = CommandBuilder.Current.GetCommandInstance(type);
             var arguments = Parse(args);
 
             foreach (var argument in arguments)

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.2.2.3\lib\net40-client\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,14 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivatorCommandFactory.cs" />
     <Compile Include="Argument.cs" />
     <Compile Include="ArgumentMatcher.cs" />
     <Compile Include="ArgumentParser.cs" />
     <Compile Include="ArgumentSet.cs" />
-    <Compile Include="ConsoleApplication.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="MatchAttribute.cs" />
+    <Compile Include="CommandBuilder.cs" />
+    <Compile Include="ConsoleAppBase.cs" />
+    <Compile Include="ICommandFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleInjectorCommandFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
 
 namespace SampleConsoleApplication.Commands
 {
-    public class HelpCommand : ICommand
+    public class HelpCommand
     {
         public string Execute(HelpArgs args)
         {
