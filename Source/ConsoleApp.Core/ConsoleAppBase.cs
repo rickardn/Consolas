@@ -31,6 +31,7 @@ namespace ConsoleApp.Core
                 _defaultCommandArgs = defaultCommandArgs;
             }
 
+            // Do not refactor
             _argTypes = Assembly.GetCallingAssembly().GetTypes();
 
             MatchArgs(args);
@@ -38,6 +39,7 @@ namespace ConsoleApp.Core
 
         protected static void Match(string[] args)
         {
+            // Do not refactor
             _argTypes = Assembly.GetCallingAssembly().GetTypes();
 
             MatchArgs(args);
@@ -149,24 +151,5 @@ namespace ConsoleApp.Core
                 _defaultCommand();
             }
         }
-    }
-
-    public class SystemConsole : IConsole
-    {
-        public void WriteLine(string value)
-        {
-            Console.WriteLine(value);
-        }
-
-        public void WriteLine(object value)
-        {
-            Console.WriteLine(value);
-        }
-    }
-
-    public interface IConsole
-    {
-        void WriteLine(string value);
-        void WriteLine(object value);
     }
 }

@@ -50,8 +50,10 @@
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="ConsoleAppBase.cs" />
     <Compile Include="ICommandFactory.cs" />
+    <Compile Include="IConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleInjectorCommandFactory.cs" />
+    <Compile Include="SystemConsole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

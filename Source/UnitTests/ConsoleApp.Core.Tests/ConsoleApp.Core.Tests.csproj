@@ -47,10 +47,10 @@
   <ItemGroup>
     <Compile Include="ArgumentMatcherTests.cs" />
     <Compile Include="ArgumentParserTests.cs" />
-    <Compile Include="ConsoleApplicationTests.cs" />
+    <Compile Include="ConsoleAppBaseTests.cs" />
     <Compile Include="Helpers\BooleanParameter.cs" />
     <Compile Include="Helpers\MultiTypeParameter.cs" />
-    <Compile Include="Helpers\MyConsoleAppBase.cs" />
+    <Compile Include="Helpers\SimpleConsoleApp.cs" />
     <Compile Include="Helpers\SingleParameter.cs" />
     <Compile Include="Helpers\TwoParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
