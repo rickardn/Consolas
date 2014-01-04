@@ -1,4 +1,6 @@
-﻿// ReSharper disable InconsistentNaming
+﻿using System.Reflection;
+using System.Runtime.InteropServices;
+// ReSharper disable InconsistentNaming
 using System;
 using System.Collections.Generic;
 using ConsoleApp.Core.Tests.Helpers;
@@ -27,6 +29,11 @@ namespace ConsoleApp.Core.Tests
             };
         }
 
+        private Type Match(string[] args)
+        {
+            return matcher.Match(args);
+        }
+
         [TestCase(new[] { "-IsTrue" }, typeof(BooleanParameter))]
         [TestCase(new[] { "-Parameter" }, typeof(SingleParameter))]
         [TestCase(new[] { "-Parameter1", "-Parameter2" }, typeof(TwoParameters))]
@@ -35,7 +42,7 @@ namespace ConsoleApp.Core.Tests
         {
             Match(args).ShouldEqual(expectedType);
         }
-        
+
         [TestCase(new[] { "-Parameter2", "-Parameter1" }, typeof(TwoParameters))]
         [TestCase(new[] { "-String", "-Bool" }, typeof(MultiTypeParameter))]
         public void Match_ShouldMatchNonDefaultOrder(string[] args, Type expectedType)
@@ -73,11 +80,6 @@ namespace ConsoleApp.Core.Tests
         public void Match_MatchesValue(string[] args, Type expected)
         {
             Match(args).ShouldEqual(expected);
-        }
-
-        private Type Match(string[] args)
-        {
-            return matcher.Match(args);
         }
 
         [Test]
@@ -118,6 +120,14 @@ namespace ConsoleApp.Core.Tests
         {
             var result = matcher.MatchToObject<MultiTypeParameter>(arg);
             result.Bool.ShouldEqual(expected);
+        }
+
+        [TestCase(new [] { "-Parameter", "foo" }, "foo")]
+        [TestCase(new [] { "-parameter", "foo" }, "foo")]
+        public void MatchToObject_IgnoreCase(string[] args, string expected)
+        {
+            var result = matcher.MatchToObject<SingleParameter>(args);
+            Assert.That(result.Parameter, Is.EqualTo(expected));
         }
 
         [Test]

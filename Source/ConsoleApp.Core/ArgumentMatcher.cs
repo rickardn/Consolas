@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace ConsoleApp.Core
 {
@@ -28,19 +29,10 @@ namespace ConsoleApp.Core
             {
                 var argumentName = RemovePrefix(argument.Key);
 
-                var propertyInfo = type.GetProperty(argumentName);
+                var propertyInfo = GetPropertyInfo(type, argumentName);
                 if (propertyInfo != null)
                 {
-                    if (propertyInfo.PropertyType == typeof(bool))
-                    {
-                        propertyInfo.SetValue(instance, 
-                            argument.Value.Value == null 
-                            || bool.Parse(argument.Value.Value), null);
-                    }
-                    else
-                    {
-                        propertyInfo.SetValue(instance, argument.Value.Value, null);
-                    }
+                    SetValue(propertyInfo, instance, argument);
                 }
             }
 
@@ -55,6 +47,20 @@ namespace ConsoleApp.Core
         public Type Match(string[] args)
         {
             return Match(Parse(args));
+        }
+
+        private void SetValue(PropertyInfo propertyInfo, object instance, KeyValuePair<string, Argument> argument)
+        {
+            if (propertyInfo.PropertyType == typeof (bool))
+            {
+                propertyInfo.SetValue(instance,
+                    argument.Value.Value == null
+                    || bool.Parse(argument.Value.Value), null);
+            }
+            else
+            {
+                propertyInfo.SetValue(instance, argument.Value.Value, null);
+            }
         }
 
         private static ArgumentSet Parse(string[] args)
@@ -73,8 +79,7 @@ namespace ConsoleApp.Core
                 {
                     var argumentName = RemovePrefix(argument.Key);
 
-                    var propertyInfo = type.GetProperty(argumentName);
-                    if (propertyInfo != null)
+                    if (GetPropertyInfo(type, argumentName) != null)
                     {
                         isMatch = true;
                     }
@@ -87,6 +92,12 @@ namespace ConsoleApp.Core
             }
 
             return null;
+        }
+
+        private static PropertyInfo GetPropertyInfo(IReflect type, string argumentName)
+        {
+            return type.GetProperty(argumentName,
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
         }
 
         private string RemovePrefix(string key)
