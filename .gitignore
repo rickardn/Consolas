@@ -29,3 +29,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 _NCrunch*
 *.ncrunch*
+*.lvu
+*.ixd

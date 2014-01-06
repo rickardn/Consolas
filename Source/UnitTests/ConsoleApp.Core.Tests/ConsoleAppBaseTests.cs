@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using ConsoleApp.Core.Tests.Helpers;
 using NUnit.Framework;
+using Should;
 
 namespace ConsoleApp.Core.Tests
 {
@@ -8,20 +11,18 @@ namespace ConsoleApp.Core.Tests
     public class ConsoleAppBaseTests
     {
         [Test]
-        public void Match_Null_Throws()
+        public void Match_EndToEndTest()
         {
+            var textWriter = Console.Out;
+            var sb = new StringBuilder();
+            var testOut = new StringWriter(sb);
+            Console.SetOut(testOut);
+
             var sut = new SimpleConsoleApp();
-            Assert.Throws<ArgumentException>(() => 
-                sut.Main(null));
-        }
+            sut.Main(new []{"-Parameter","foo"});
 
-        [Test]
-        public void Match_DefaultCommandNull_Throws()
-        {
-            var sut = new ConsoleAppWithNullDefaultCommand();
-            Assert.Throws<ArgumentException>(() => sut.Main(null));
+            StringAssert.Contains("SimpleCommand", sb.ToString());
+            Console.SetOut(textWriter);
         }
-
-        
     }
 }

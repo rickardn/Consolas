@@ -1,8 +1,7 @@
-﻿using ConsoleApp.Core;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Should;
 
-namespace ConsoleClient.Tests
+namespace ConsoleApp.Core.Tests
 {
     [TestFixture]
     public class ArgumentParserTests
@@ -12,7 +11,7 @@ namespace ConsoleClient.Tests
         [SetUp]
         public void BeforeEach()
         {
-            _parser = CreateArgumentParser();
+            _parser = new ArgumentParser();
         }
 
         [Test]
@@ -71,11 +70,6 @@ namespace ConsoleClient.Tests
         private ArgumentSet Parse(string[] args)
         {
             return _parser.Parse(args, new ArgumentSet());
-        }
-
-        private static ArgumentParser CreateArgumentParser()
-        {
-            return new ArgumentParser();
         }
     }
 }

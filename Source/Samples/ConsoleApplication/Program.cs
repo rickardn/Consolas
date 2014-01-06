@@ -8,7 +8,7 @@ namespace SampleConsoleApplication
     {
         public static void Main(string[] args)
         {
-            DefaultCommand = () => Console.WriteLine("foo");
+            //DefaultCommand = () => Console.WriteLine("foo");
             Match(args);
         }
 

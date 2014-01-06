@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -8,81 +9,49 @@ namespace ConsoleApp.Core
 {
     public abstract class ConsoleAppBase
     {
-        private static Action _defaultCommand;
+        private const string InitMethodName = "Match";
+        private const string ExecuteMethod = "Execute";
         internal static Container Container;
-        private static Type _defaultCommandArgs;
-        private static Type[] _argTypes;
-        private static ArgumentMatcher _matcher;
-        private static string[] _args;
+        private ArgumentMatcher _argumentMatcher;
 
-        protected static Action DefaultCommand
-        {
-            set { _defaultCommand = value; }
-        }
-
-        public virtual void Configure(Container container)
-        {
-        }
-
-        protected static void Match(string[] args, Type defaultCommandArgs)
-        {
-            if (defaultCommandArgs != null)
-            {
-                _defaultCommandArgs = defaultCommandArgs;
-            }
-
-            // Do not refactor
-            _argTypes = Assembly.GetCallingAssembly().GetTypes();
-
-            MatchArgs(args);
-        }
+        public virtual void Configure(Container container) {}
 
         protected static void Match(string[] args)
         {
             // Do not refactor
-            _argTypes = Assembly.GetCallingAssembly().GetTypes();
+            var app = CreateConsoleApp();
+            Configure(app);
 
-            MatchArgs(args);
-        }
-
-        private static void MatchArgs(string[] args)
-        {
-            CreateAndConfigureConsoleApp();
-
-            _args = args;
-
-            _matcher = new ArgumentMatcher
-            {
-                Types = _argTypes.ToList()
-            };
-
-            Type argsType = _matcher.Match(_args);
-
-            Type commandType = FindCommandType(argsType);
+            Assembly callingAssembly = Assembly.GetCallingAssembly();
+            CommandType commandType = app.FindCommandType(args, callingAssembly);
 
             if (commandType != null)
             {
-                ExecuteCommand(commandType, argsType);
-            }
-            else
-            {
-                ExecuteDefaultCommand();
+                CommandSet command = app.FindCommand(args, commandType);
+                app.ExecuteCommand(commandType, command);
             }
         }
 
-        private static void CreateAndConfigureConsoleApp()
+        private static void Configure(ConsoleAppBase app)
         {
+            Container = new Container();
+            CommandBuilder.Current.SetCommandFactory(
+                new SimpleInjectorCommandFactory(Container));
+            app.Configure(Container);
+        }
+
+        private static ConsoleAppBase CreateConsoleApp()
+        {
+            ConsoleAppBase consoleAppBase = null;
             var stack = new StackTrace();
             var stackFrames = stack.GetFrames();
-            if (stackFrames == null)
-            {
-                return;
-            }
 
+            // ReSharper disable PossibleNullReferenceException
             foreach (StackFrame frame in stackFrames)
+            // ReSharper restore PossibleNullReferenceException
             {
                 var method = frame.GetMethod();
-                if (method.Name != "Match")
+                if (method.Name != InitMethodName)
                 {
                     var declaringType = frame.GetMethod().DeclaringType;
                     if (declaringType != null && declaringType.IsAbstract)
@@ -90,66 +59,68 @@ namespace ConsoleApp.Core
 
                     if (declaringType != null)
                     {
-                        var o = Activator.CreateInstance(declaringType) as ConsoleAppBase;
-                        if (o != null)
-                        {
-                            Container = new Container();
-                            CommandBuilder.Current.SetCommandFactory(
-                                new SimpleInjectorCommandFactory(Container));
-                            o.Configure(Container);
-                        }
+                        consoleAppBase = Activator.CreateInstance(declaringType) as ConsoleAppBase;
+                        break;
                     }
-                    break;
                 }
             }
+            return consoleAppBase;
         }
 
-        private static void ExecuteCommand(Type commandType, Type argsType)
+        private CommandType FindCommandType(string[] args, Assembly callingAssembly)
         {
-            var command = CommandBuilder.Current.GetCommandInstance(commandType);
-            var arg = _matcher.MatchToObject(_args, argsType);
+            var argTypes = callingAssembly.GetTypes().ToList();
+            _argumentMatcher = new ArgumentMatcher
+            {
+                Types = argTypes
+            };
+            var argsType = _argumentMatcher.Match(args);
+            var commandType = FindMatchingCommandType(argTypes, argsType);
+            if (commandType != null)
+            {
+                return new CommandType
+                {
+                    Command = commandType,
+                    Args = argsType
+                };
+            }
+            return null;
+        }
 
-            var methodInfo = commandType.GetMethod("Execute");
-            var result = methodInfo.Invoke(command, new[] {arg});
+        private class CommandType
+        {
+            public Type Command { get; set; }
+            public Type Args { get; set; }
+        }
+
+        private class CommandSet
+        {
+            public object Command { get; set; }
+            public object Args { get; set; }
+        }
+
+        private CommandSet FindCommand(string[] args, CommandType commandType)
+        {
+            object command = CommandBuilder.Current.GetCommandInstance(commandType.Command);
+            object arg = _argumentMatcher.MatchToObject(args, commandType.Args);
+
+            return new CommandSet
+            {
+                Command = command,
+                Args = arg
+            };
+        }
+
+        private void ExecuteCommand(CommandType commandType, CommandSet command)
+        {
+            var methodInfo = commandType.Command.GetMethod(ExecuteMethod);
+            var result = methodInfo.Invoke(command.Command, new[] { command.Args });
             Console.WriteLine(result);
         }
 
-        private static Type FindCommandType(Type argsType)
+        private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
         {
-            var commands = _argTypes
-                .Where(x => x.GetMethods().Any(
-                    m => m.GetParameters().Any(
-                        p => p.ParameterType == argsType)));
-
-            Type commandType = commands.FirstOrDefault();
-            return commandType;
-        }
-
-        private static void ExecuteDefaultCommand()
-        {
-            if (_defaultCommand == null)
-            {
-                if (_defaultCommandArgs == null)
-                {
-                    throw new ArgumentException();
-                }
-                else
-                {
-                    var commandType = FindCommandType(_defaultCommandArgs);
-                    if (commandType != null)
-                    {
-                        ExecuteCommand(commandType, _defaultCommandArgs);
-                    }
-                    else
-                    {
-                        throw new ArgumentException();
-                    }
-                }
-            }
-            else
-            {
-                _defaultCommand();
-            }
+            return argTypes.FirstOrDefault(x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
         }
     }
 }
