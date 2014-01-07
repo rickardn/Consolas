@@ -36,11 +36,25 @@ namespace ConsoleApp.Core.Tests
         }
 
         [Test]
+        public void Parse_SingleArg_ReturnsSingleArgument2()
+        {
+            var result = Parse(new[] { "arg" });
+            result.Count.ShouldEqual(1);
+        }
+
+        [Test]
         public void Parse_MultipleArgs_ReturnsMultipleArguments()
         {
             var result = Parse(new[] {"arg1", "arg2"});
             result["arg1"].IsMatch.ShouldBeTrue();
             result["arg2"].IsMatch.ShouldBeTrue();
+        }
+
+        [Test]
+        public void Parse_MultipleArgs_ReturnsExactlySameNumberOfArguments()
+        {
+            var result = Parse(new[] { "arg1", "arg2" });
+            result.Count.ShouldEqual(2);
         }
 
         [Test]
@@ -52,11 +66,25 @@ namespace ConsoleApp.Core.Tests
         }
 
         [Test]
+        public void Parse_NameValuePair_ReturnsExactlySingleArgument()
+        {
+            var result = Parse(new[] { "-arg", "val" });
+            result.Count.ShouldEqual(1);
+        }
+
+        [Test]
         public void Parse_NameValuePairs_ReturnsMultipleArguments()
         {
             var result = Parse(new[] { "-arg1", "val1", "-arg2", "val2" });
             result["-arg1"].Value.ShouldEqual("val1");
             result["-arg2"].Value.ShouldEqual("val2");
+        }
+
+        [Test]
+        public void Parse_NameValuePairs_ReturnsExacltyMultipleArguments()
+        {
+            var result = Parse(new[] { "-arg1", "val1", "-arg2", "val2" });
+            result.Count.ShouldEqual(2);
         }
 
         [Test]

@@ -18,11 +18,13 @@ namespace ConsoleApp.Core
 
         protected static void Match(string[] args)
         {
-            // Do not refactor
-            var app = CreateConsoleApp();
+            #region Do not refactor
+            Assembly callingAssembly = Assembly.GetCallingAssembly();
+            #endregion
+
+            ConsoleAppBase app = CreateConsoleApp();
             Configure(app);
 
-            Assembly callingAssembly = Assembly.GetCallingAssembly();
             CommandType commandType = app.FindCommandType(args, callingAssembly);
 
             if (commandType != null)
@@ -87,18 +89,6 @@ namespace ConsoleApp.Core
             return null;
         }
 
-        private class CommandType
-        {
-            public Type Command { get; set; }
-            public Type Args { get; set; }
-        }
-
-        private class CommandSet
-        {
-            public object Command { get; set; }
-            public object Args { get; set; }
-        }
-
         private CommandSet FindCommand(string[] args, CommandType commandType)
         {
             object command = CommandBuilder.Current.GetCommandInstance(commandType.Command);
@@ -114,6 +104,7 @@ namespace ConsoleApp.Core
         private void ExecuteCommand(CommandType commandType, CommandSet command)
         {
             var methodInfo = commandType.Command.GetMethod(ExecuteMethod);
+            // TODO
             var result = methodInfo.Invoke(command.Command, new[] { command.Args });
             Console.WriteLine(result);
         }
@@ -121,6 +112,18 @@ namespace ConsoleApp.Core
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
         {
             return argTypes.FirstOrDefault(x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
+        }
+
+        private class CommandType
+        {
+            public Type Command { get; set; }
+            public Type Args { get; set; }
+        }
+
+        private class CommandSet
+        {
+            public object Command { get; set; }
+            public object Args { get; set; }
         }
     }
 }

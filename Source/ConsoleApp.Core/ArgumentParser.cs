@@ -28,6 +28,7 @@
                         IsMatch = true,
                         Value = parameterValue
                     };
+                    i++;
                 }
                 else
                 {

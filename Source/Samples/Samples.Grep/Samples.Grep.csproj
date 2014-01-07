@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D423725D-FCE3-4932-90AA-99ED4F007772}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0A42770C-86D6-4A75-BA7F-B1EC1CBA5008}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApp.Core.Tests</RootNamespace>
-    <AssemblyName>ConsoleApp.Core.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Samples.Grep</RootNamespace>
+    <AssemblyName>Grep</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -29,12 +31,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Samples.Grep.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
-    <Reference Include="Should">
-      <HintPath>..\..\packages\Should.1.1.19\lib\Should.dll</HintPath>
+    <Reference Include="SimpleInjector.Diagnostics">
+      <HintPath>..\..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,26 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentMatcherTests.cs" />
-    <Compile Include="ArgumentParserTests.cs" />
-    <Compile Include="CommandTests.cs" />
-    <Compile Include="ConsoleAppBaseTests.cs" />
-    <Compile Include="Helpers\BooleanParameter.cs" />
-    <Compile Include="Helpers\CommandWithDefaultArgs.cs" />
-    <Compile Include="Helpers\DefaultParameters.cs" />
-    <Compile Include="Helpers\MultiTypeParameter.cs" />
-    <Compile Include="Helpers\SimpleCommand.cs" />
-    <Compile Include="Helpers\SimpleConsoleApp.cs" />
-    <Compile Include="Helpers\SingleParameter.cs" />
-    <Compile Include="Helpers\TwoParameters.cs" />
+    <Compile Include="Commands\GrepCommand.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">
-      <Project>{D5234497-2F14-45D8-A896-ECAA18C20EFF}</Project>
+      <Project>{d5234497-2f14-45d8-a896-ecaa18c20eff}</Project>
       <Name>ConsoleApp.Core</Name>
     </ProjectReference>
   </ItemGroup>
