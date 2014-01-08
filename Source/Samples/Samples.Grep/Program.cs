@@ -3,9 +3,9 @@ using SimpleInjector;
 
 namespace Samples.Grep
 {
-    class Program : ConsoleAppBase
+    public class Program : ConsoleAppBase
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Match(args);
         }

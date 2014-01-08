@@ -30,7 +30,7 @@ namespace ConsoleApp.Core
             if (commandType != null)
             {
                 CommandSet command = app.FindCommand(args, commandType);
-                app.ExecuteCommand(commandType, command);
+                app.ExecuteCommand(commandType.Command, command);
             }
         }
 
@@ -101,12 +101,18 @@ namespace ConsoleApp.Core
             };
         }
 
-        private void ExecuteCommand(CommandType commandType, CommandSet command)
+        private void ExecuteCommand(Type commandType, CommandSet command)
         {
-            var methodInfo = commandType.Command.GetMethod(ExecuteMethod);
-            // TODO
-            var result = methodInfo.Invoke(command.Command, new[] { command.Args });
-            Console.WriteLine(result);
+            var methodInfo = commandType.GetMethod(ExecuteMethod);
+            try
+            {
+                var result = methodInfo.Invoke(command.Command, new[] { command.Args });
+                Console.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                throw e.InnerException;
+            }
         }
 
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
