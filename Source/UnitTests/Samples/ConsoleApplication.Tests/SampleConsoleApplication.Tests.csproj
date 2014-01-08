@@ -59,10 +59,6 @@
       <Project>{D5234497-2F14-45D8-A896-ECAA18C20EFF}</Project>
       <Name>ConsoleApp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Samples\ConsoleApplication\SampleConsoleApplication.csproj">
-      <Project>{20150954-0A2E-4704-93FE-C4B6B4EF05A3}</Project>
-      <Name>SampleConsoleApplication</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
