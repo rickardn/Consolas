@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Samples.Grep.Tests
 {
     [TestFixture]
-    public class GrepEndToEndTests
+    public class EndToEndTests
     {
         private StringBuilder _consoleOut;
         private TextWriter _outWriter;
@@ -26,12 +26,19 @@ namespace Samples.Grep.Tests
         }
 
         [Test]
-        public void ExpectedBehavior()
+        public void Grep()
         {
             Program.Main(new[] {"foo", "doc.txt"});
             
             StringAssert.Contains("foo", _consoleOut.ToString());
             StringAssert.Contains("foo bar baz", _consoleOut.ToString());
+        }
+
+        [Test]
+        public void Version()
+        {
+            Program.Main(new []{ "-version"});
+            StringAssert.Contains("2.4.2", _consoleOut.ToString());
         }
     }
 }

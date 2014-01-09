@@ -52,32 +52,5 @@ namespace ConsoleApp.Core.Tests
             StringAssert.Contains("foo", _consoleOut.ToString());
             StringAssert.Contains("bar", _consoleOut.ToString());
         }
-
-        [Test]
-        public void Match_MixingImplicitDefaultArgumentsWithExplicit_EndToEndTest1()
-        {
-            var sut = new SimpleConsoleApp();
-            sut.Main(new[] { "-DefaultProperty1", "foo", "bar" });
-            StringAssert.Contains("foo", _consoleOut.ToString());
-            StringAssert.Contains("bar", _consoleOut.ToString());
-        }
-
-        [Test]
-        public void Match_MixingImplicitDefaultArgumentsWithExplicit_EndToEndTest2()
-        {
-            var sut = new SimpleConsoleApp();
-            sut.Main(new[] { "foo", "-DefaultProperty2", "bar" });
-            StringAssert.Contains("foo", _consoleOut.ToString());
-            StringAssert.Contains("bar", _consoleOut.ToString());
-        }
-
-        [Test]
-        public void Match_OveridingImplicitDefaultArgumentWithExplicit_EndToEndTest()
-        {
-            var sut = new SimpleConsoleApp();
-            sut.Main(new[] { "foo", "-DefaultProperty1", "bar" });
-            StringAssert.Contains("bar", _consoleOut.ToString());
-            StringAssert.DoesNotContain("foo", _consoleOut.ToString());
-        }
     }
 }

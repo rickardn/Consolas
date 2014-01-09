@@ -72,9 +72,12 @@ namespace ConsoleApp.Core
         {
             if (propertyInfo.PropertyType == typeof (bool))
             {
-                propertyInfo.SetValue(instance,
-                    argument.Value.Value == null
-                    || bool.Parse(argument.Value.Value), null);
+                var value = argument.Value.Value == null;
+                if (!value)
+                {
+                    bool.TryParse(argument.Value.Value, out value);
+                }
+                propertyInfo.SetValue(instance, value, null);
             }
             else
             {
@@ -90,6 +93,8 @@ namespace ConsoleApp.Core
 
         private Type Match(ArgumentSet arguments)
         {
+            bool useDefault = arguments.Count == 0 || !HasPrefix(arguments.First().Key);
+
             foreach (var type in Types)
             {
                 var customAttributes = type.GetCustomAttributes(typeof (DefaultArgumentsAttribute), false);
@@ -99,18 +104,20 @@ namespace ConsoleApp.Core
 
                 foreach (var argument in arguments)
                 {
-                    if (argument.Value.Value == null && isDefaultArgs)
+                    if (isDefaultArgs && useDefault && !HasPrefix(argument.Key))
                     {
+                        isMatch = true;
                         argument.Value.IsDefault = true;
                         argument.Value.Value = argument.Key;
-                        isMatch = true;
                     }
-
-                    var argumentName = RemovePrefix(argument.Key);
-
-                    if (GetPropertyInfo(type, argumentName) != null)
+                    else
                     {
-                        isMatch = true;
+                        var argumentName = RemovePrefix(argument.Key);
+
+                        if (GetPropertyInfo(type, argumentName) != null)
+                        {
+                            isMatch = true;
+                        }
                     }
                 }
 
@@ -121,6 +128,11 @@ namespace ConsoleApp.Core
             }
 
             return null;
+        }
+
+        private bool HasPrefix(string key)
+        {
+            return Prefixes.Any(key.StartsWith);
         }
 
         private static PropertyInfo GetPropertyInfo(Type type, string argumentName)

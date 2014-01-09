@@ -21,8 +21,7 @@ namespace ConsoleApp.Core.Tests
                     typeof(TwoParameters), 
                     typeof(SingleParameter), 
                     typeof(BooleanParameter),
-                    typeof(MultiTypeParameter),
-                    typeof(DefaultParameters)
+                    typeof(MultiTypeParameter)
                 },
             };
         }
@@ -140,33 +139,6 @@ namespace ConsoleApp.Core.Tests
         {
             matcher.MatchToObject<SingleParameter>(new string[0])
                    .ShouldBeNull();
-        }
-
-        [Test]
-        public void MatchToObject_NoParameterName_MatchesFirstDefaultArgument()
-        {
-            matcher.MatchToObject<DefaultParameters>(new[] {"foo"}).ShouldNotBeNull();
-        }
-
-        [Test]
-        public void MatchToObject_NoParameterName_SetsFirstDefaultArgumentValue()
-        {
-            var result = matcher.MatchToObject<DefaultParameters>(new[] { "foo" });
-            result.DefaultProperty1.ShouldEqual("foo");
-        }
-
-        [Test]
-        public void MatchToObject_NoParameterNames_MatchesDefaultArgumentsInOrder()
-        {
-            matcher.MatchToObject<DefaultParameters>(new[] {"foo", "bar"}).ShouldNotBeNull();
-        }
-
-        [Test]
-        public void MatchToObject_NoParameterNames_SetsDefaultArgumentsInOrder()
-        {
-            var result = matcher.MatchToObject<DefaultParameters>(new[] {"foo", "bar"});
-            result.DefaultProperty1.ShouldEqual("foo");
-            result.DefaultProperty2.ShouldEqual("bar");
         }
     }
 }
