@@ -31,7 +31,7 @@ namespace Samples.Grep.Commands
                     buffer.AppendLine(line);
                 }
             }
-            return buffer.ToString();
+            return buffer.ToString().Substring(0, buffer.Length - 1);
         }
     }
 }

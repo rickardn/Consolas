@@ -32,6 +32,11 @@ namespace ConsoleApp.Core
                 CommandSet command = app.FindCommand(args, commandType);
                 app.ExecuteCommand(commandType.Command, command);
             }
+            else
+            {
+                // TODO
+                Console.WriteLine("Using: {0}.exe ...", callingAssembly.GetName().Name.ToLower());
+            }
         }
 
         private static void Configure(ConsoleAppBase app)
@@ -76,8 +81,10 @@ namespace ConsoleApp.Core
             {
                 Types = argTypes
             };
+
             var argsType = _argumentMatcher.Match(args);
             var commandType = FindMatchingCommandType(argTypes, argsType);
+            
             if (commandType != null)
             {
                 return new CommandType
@@ -86,6 +93,13 @@ namespace ConsoleApp.Core
                     Args = argsType
                 };
             }
+
+            if (commandType == null && argsType != null)
+            {
+                throw new NotImplementedException(
+                    string.Format("No class with an Execute-method with the class '{0}' as argument could be found", argsType.Name));
+            }
+
             return null;
         }
 

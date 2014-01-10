@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace ConsoleApp.Core.Tests
 {
     [TestFixture]
-    public class ConsoleApp_SystemTests
+    public class ConsoleAppBaseTests
     {
         private TextWriter _consoleOutWriter;
         private StringBuilder _consoleOut;
@@ -51,6 +51,30 @@ namespace ConsoleApp.Core.Tests
             sut.Main(new[] { "foo", "bar" });
             StringAssert.Contains("foo", _consoleOut.ToString());
             StringAssert.Contains("bar", _consoleOut.ToString());
+            StringAssert.Contains("DefaultCommand", _consoleOut.ToString());
+        }
+
+        [Test]
+        public void Match_NoMatchingArgument_PrintsUsageMessageIfHelpCommandIsMissing()
+        {
+            var sut = new SimpleConsoleApp();
+            sut.Main(new[] { "-NoMatchingArg" });
+            StringAssert.Contains("Using", _consoleOut.ToString());
+        }
+
+        [Test]
+        public void Match_ArgumentWithoutCommand_ThrowsException()
+        {
+            var sut = new SimpleConsoleApp();
+            Assert.Throws<NotImplementedException>(() => 
+                sut.Main(new[] {"-ArgWithoutCommand", "foo"}));
+        }
+
+        [Test]
+        public void Match_CommandWhichThrowsException_SameExceptionIsRethrown()
+        {
+            var sut = new SimpleConsoleApp();
+            Assert.Throws<Exception>(() => sut.Main(new[] {"-Throw"}));
         }
     }
 }

@@ -46,12 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcitvatorCommandFactoryTests.cs" />
     <Compile Include="ArgumentMatcherDefaultArgumentsTests.cs" />
     <Compile Include="ArgumentMatcherTests.cs" />
     <Compile Include="ArgumentParserTests.cs" />
     <Compile Include="CommandTests.cs" />
-    <Compile Include="ConsoleApp_SystemTests.cs" />
+    <Compile Include="ConsoleAppBaseTests.cs" />
+    <Compile Include="Helpers\ArgumentWithoutCommand.cs" />
     <Compile Include="Helpers\BooleanParameter.cs" />
+    <Compile Include="Helpers\CommandThrowsException.cs" />
     <Compile Include="Helpers\CommandWithDefaultArgs.cs" />
     <Compile Include="Helpers\DefaultParameters.cs" />
     <Compile Include="Helpers\MultiTypeParameter.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Helpers\SingleParameter.cs" />
     <Compile Include="Helpers\TwoParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemConsoleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

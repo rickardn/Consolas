@@ -9,7 +9,7 @@ namespace Samples.Grep.Tests
     public class GrepCommandTests
     {
         [Test]
-        public void ExpectedBehavior()
+        public void Execute_ValidArgument_ReturnsGrepedText()
         {
             var console = Substitute.For<IConsole>();
             var command = new GrepCommand(console);

@@ -4,7 +4,7 @@
     {
         public string Execute(DefaultParameters args)
         {
-            return args.DefaultProperty1 + " " + args.DefaultProperty2;
+            return args.DefaultProperty1 + " " + args.DefaultProperty2 + " DefaultCommand";
         }
     }
 }

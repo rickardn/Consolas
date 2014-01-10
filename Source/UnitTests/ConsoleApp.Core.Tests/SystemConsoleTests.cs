@@ -3,10 +3,10 @@ using System.IO;
 using System.Text;
 using NUnit.Framework;
 
-namespace Samples.Grep.Tests
+namespace ConsoleApp.Core.Tests
 {
     [TestFixture]
-    public class EndToEndTests
+    public class SystemConsoleTests
     {
         private StringBuilder _consoleOut;
         private TextWriter _outWriter;
@@ -26,17 +26,22 @@ namespace Samples.Grep.Tests
         }
 
         [Test]
-        public void Grep()
+        public void WriteLine_String_WritesToConsoleOut()
         {
-            Program.Main(new[] {"foo", "doc.txt"});
-            StringAssert.Contains("foo bar baz", _consoleOut.ToString());
+            var console = new SystemConsole();
+            console.WriteLine("foo");
+
+            StringAssert.Contains("foo", _consoleOut.ToString());
         }
 
         [Test]
-        public void Version()
+        public void WriteLine_Object_WritesToConsoleOut()
         {
-            Program.Main(new []{ "-version"});
-            StringAssert.Contains("2.4.2", _consoleOut.ToString());
+            var console = new SystemConsole();
+            console.WriteLine(1);
+
+            StringAssert.Contains("1", _consoleOut.ToString());
         }
+
     }
 }
