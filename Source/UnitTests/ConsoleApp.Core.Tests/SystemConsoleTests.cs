@@ -10,6 +10,7 @@ namespace ConsoleApp.Core.Tests
     {
         private StringBuilder _consoleOut;
         private TextWriter _outWriter;
+        private SystemConsole _console;
 
         [SetUp]
         public void Setup()
@@ -17,6 +18,7 @@ namespace ConsoleApp.Core.Tests
             _outWriter = Console.Out;
             _consoleOut = new StringBuilder();
             Console.SetOut(new StringWriter(_consoleOut));
+            _console = new SystemConsole();
         }
 
         [TearDown]
@@ -28,20 +30,22 @@ namespace ConsoleApp.Core.Tests
         [Test]
         public void WriteLine_String_WritesToConsoleOut()
         {
-            var console = new SystemConsole();
-            console.WriteLine("foo");
-
+            _console.WriteLine("foo");
             StringAssert.Contains("foo", _consoleOut.ToString());
         }
 
         [Test]
         public void WriteLine_Object_WritesToConsoleOut()
         {
-            var console = new SystemConsole();
-            console.WriteLine(1);
-
+            _console.WriteLine(1);
             StringAssert.Contains("1", _consoleOut.ToString());
         }
 
+        [Test]
+        public void Write_String_WritesToConsoleOut()
+        {
+            _console.Write("foo");
+            StringAssert.Contains("foo", _consoleOut.ToString());
+        }
     }
 }
