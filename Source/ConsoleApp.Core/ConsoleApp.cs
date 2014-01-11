@@ -7,7 +7,7 @@ using SimpleInjector;
 
 namespace ConsoleApp.Core
 {
-    public abstract class ConsoleAppBase
+    public abstract class ConsoleApp
     {
         private const string InitMethodName = "Match";
         private const string ExecuteMethod = "Execute";
@@ -22,7 +22,7 @@ namespace ConsoleApp.Core
             Assembly callingAssembly = Assembly.GetCallingAssembly();
             #endregion
 
-            ConsoleAppBase app = CreateConsoleApp();
+            ConsoleApp app = CreateConsoleApp();
             Configure(app);
 
             CommandType commandType = app.FindCommandType(args, callingAssembly);
@@ -39,7 +39,7 @@ namespace ConsoleApp.Core
             }
         }
 
-        private static void Configure(ConsoleAppBase app)
+        private static void Configure(ConsoleApp app)
         {
             Container = new Container();
             CommandBuilder.Current.SetCommandFactory(
@@ -47,9 +47,9 @@ namespace ConsoleApp.Core
             app.Configure(Container);
         }
 
-        private static ConsoleAppBase CreateConsoleApp()
+        private static ConsoleApp CreateConsoleApp()
         {
-            ConsoleAppBase consoleAppBase = null;
+            ConsoleApp consoleApp = null;
             var stack = new StackTrace();
             var stackFrames = stack.GetFrames();
 
@@ -66,12 +66,12 @@ namespace ConsoleApp.Core
 
                     if (declaringType != null)
                     {
-                        consoleAppBase = Activator.CreateInstance(declaringType) as ConsoleAppBase;
+                        consoleApp = Activator.CreateInstance(declaringType) as ConsoleApp;
                         break;
                     }
                 }
             }
-            return consoleAppBase;
+            return consoleApp;
         }
 
         private CommandType FindCommandType(string[] args, Assembly callingAssembly)

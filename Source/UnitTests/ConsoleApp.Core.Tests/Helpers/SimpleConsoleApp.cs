@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp.Core.Tests.Helpers
 {
-    public class SimpleConsoleApp : ConsoleAppBase
+    public class SimpleConsoleApp : ConsoleApp
     {
         public void Main(string[] args)
         {

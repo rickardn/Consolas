@@ -4,7 +4,7 @@ using SimpleInjector;
 
 namespace Samples.Ping
 {
-    public class Program : ConsoleAppBase
+    public class Program : ConsoleApp.Core.ConsoleApp
     {
         public static void Main(string[] args)
         {
