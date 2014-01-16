@@ -51,8 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Args\GrepArgs.cs" />
+    <Compile Include="Args\VersionArgs.cs" />
     <Compile Include="Commands\GrepCommand.cs" />
-    <Compile Include="Commands\VersionArgs.cs" />
     <Compile Include="Commands\VersionCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Views\Version.cstxt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">

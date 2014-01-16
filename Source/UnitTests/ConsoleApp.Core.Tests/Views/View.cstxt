@@ -1,0 +1,3 @@
+﻿@model ConsoleApp.Core.Tests.Helpers.ViewModel
+
+View @Model.Message

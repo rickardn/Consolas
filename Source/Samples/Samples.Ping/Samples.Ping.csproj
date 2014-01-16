@@ -51,8 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Args.cs" />
+    <Compile Include="Models\IThreadService.cs" />
+    <Compile Include="Models\PingArgs.cs" />
     <Compile Include="Commands\PingCommand.cs" />
+    <Compile Include="Models\PingLineViewModel.cs" />
+    <Compile Include="Models\PingViewModel.cs" />
     <Compile Include="Models\ThreadService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +63,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="Views\View.cstxt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">
@@ -67,6 +73,7 @@
       <Name>ConsoleApp.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

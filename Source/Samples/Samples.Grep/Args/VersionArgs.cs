@@ -1,4 +1,4 @@
-﻿namespace Samples.Grep.Commands
+﻿namespace Samples.Grep.Args
 {
     public class VersionArgs
     {

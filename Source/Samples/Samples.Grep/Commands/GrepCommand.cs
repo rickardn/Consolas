@@ -2,16 +2,10 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using ConsoleApp.Core;
+using Samples.Grep.Args;
 
 namespace Samples.Grep.Commands
 {
-    [DefaultArguments]
-    public class GrepArgs
-    {
-        public string Regex { get; set; }
-        public string FileName { get; set; }
-    }
-
     public class GrepCommand
     {
         private readonly IConsole _console;

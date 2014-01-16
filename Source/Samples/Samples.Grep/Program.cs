@@ -1,4 +1,6 @@
-﻿using ConsoleApp.Core;
+﻿using System;
+using System.Diagnostics;
+using ConsoleApp.Core;
 using SimpleInjector;
 
 namespace Samples.Grep
@@ -7,7 +9,11 @@ namespace Samples.Grep
     {
         public static void Main(string[] args)
         {
+            var watch = new Stopwatch();
+            watch.Start();
             Match(args);
+            watch.Stop();
+            Console.WriteLine(watch.Elapsed.Seconds + "," + watch.ElapsedMilliseconds);
         }
 
         public override void Configure(Container container)

@@ -1,72 +1,52 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using ConsoleApp.Core.Tests.Helpers;
 using NUnit.Framework;
 
 namespace ConsoleApp.Core.Tests
 {
     [TestFixture]
-    public class ConsoleAppBaseTests
+    public class ConsoleAppBaseTests : ConsoleTest
     {
-        private TextWriter _consoleOutWriter;
-        private StringBuilder _consoleOut;
-
-        [SetUp]
-        public void Setup()
-        {
-            _consoleOutWriter = Console.Out;
-            _consoleOut = new StringBuilder();
-            var testOut = new StringWriter(_consoleOut);
-            Console.SetOut(testOut);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Console.SetOut(_consoleOutWriter);
-        }
-
         [Test]
         public void Match_EndToEndTest()
         {
             var sut = new SimpleConsoleApp();
-            sut.Main(new []{"-Parameter","foo"});
-            StringAssert.Contains("SimpleCommand", _consoleOut.ToString());
+            sut.Main(new[] {"-Parameter", "foo"});
+            StringAssert.Contains("SimpleCommand", ConsoleOut.ToString());
         }
 
         [Test]
         public void Match_ExplicitDefaultArguments_EndToEndTest()
         {
             var sut = new SimpleConsoleApp();
-            sut.Main(new []{"-DefaultProperty1", "foo", "-DefaultProperty2", "bar"});
-            StringAssert.Contains("foo", _consoleOut.ToString());
-            StringAssert.Contains("bar", _consoleOut.ToString());
+            sut.Main(new[] {"-DefaultProperty1", "foo", "-DefaultProperty2", "bar"});
+            StringAssert.Contains("foo", ConsoleOut.ToString());
+            StringAssert.Contains("bar", ConsoleOut.ToString());
         }
 
         [Test]
         public void Match_ImplicitDefaultArguments_EndToEndTest()
         {
             var sut = new SimpleConsoleApp();
-            sut.Main(new[] { "foo", "bar" });
-            StringAssert.Contains("foo", _consoleOut.ToString());
-            StringAssert.Contains("bar", _consoleOut.ToString());
-            StringAssert.Contains("DefaultCommand", _consoleOut.ToString());
+            sut.Main(new[] {"foo", "bar"});
+            StringAssert.Contains("foo", ConsoleOut.ToString());
+            StringAssert.Contains("bar", ConsoleOut.ToString());
+            StringAssert.Contains("DefaultCommand", ConsoleOut.ToString());
         }
 
         [Test]
         public void Match_NoMatchingArgument_PrintsUsageMessageIfHelpCommandIsMissing()
         {
             var sut = new SimpleConsoleApp();
-            sut.Main(new[] { "-NoMatchingArg" });
-            StringAssert.Contains("Using", _consoleOut.ToString());
+            sut.Main(new[] {"-NoMatchingArg"});
+            StringAssert.Contains("Using", ConsoleOut.ToString());
         }
 
         [Test]
         public void Match_ArgumentWithoutCommand_ThrowsException()
         {
             var sut = new SimpleConsoleApp();
-            Assert.Throws<NotImplementedException>(() => 
+            Assert.Throws<NotImplementedException>(() =>
                 sut.Main(new[] {"-ArgWithoutCommand", "foo"}));
         }
 

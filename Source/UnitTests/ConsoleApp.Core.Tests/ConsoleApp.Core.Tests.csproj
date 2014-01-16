@@ -55,22 +55,28 @@
     <Compile Include="ArgumentParserTests.cs" />
     <Compile Include="CommandTests.cs" />
     <Compile Include="ConsoleAppBaseTests.cs" />
-    <Compile Include="ConsoleAppTemplateTests.cs" />
+    <Compile Include="ConsoleTest.cs" />
     <Compile Include="Helpers\ArgumentWithoutCommand.cs" />
     <Compile Include="Helpers\BooleanParameter.cs" />
     <Compile Include="Helpers\CommandThrowsException.cs" />
     <Compile Include="Helpers\CommandWithDefaultArgs.cs" />
     <Compile Include="Helpers\DefaultParameters.cs" />
+    <Compile Include="Helpers\DescendantCommand.cs" />
     <Compile Include="Helpers\MultiTypeParameter.cs" />
     <Compile Include="Helpers\SimpleCommand.cs" />
     <Compile Include="Helpers\SimpleConsoleApp.cs" />
     <Compile Include="Helpers\SingleParameter.cs" />
     <Compile Include="Helpers\TwoParameters.cs" />
+    <Compile Include="Helpers\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemConsoleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\View.cstxt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Views\ResourceView.cstxt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">

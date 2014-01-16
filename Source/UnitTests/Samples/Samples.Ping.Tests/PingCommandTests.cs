@@ -12,14 +12,12 @@ namespace Samples.Ping.Tests
         [Test]
         public void ExpectedBehavior()
         {
-            var console = Substitute.For<IConsole>();
             var thread = Substitute.For<IThreadService>();
-            var command = new PingCommand(console, thread);
-            command.Execute(new Args
+            var command = new PingCommand(thread);
+            command.Execute(new PingArgs
             {
                 Host = "google.com"
             });
-            console.Received().WriteLine(Arg.Any<string>());
         }
     }
 }

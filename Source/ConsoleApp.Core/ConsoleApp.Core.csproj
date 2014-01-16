@@ -61,6 +61,7 @@
     <Compile Include="ArgumentMatcher.cs" />
     <Compile Include="ArgumentParser.cs" />
     <Compile Include="ArgumentSet.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="ConsoleApp.cs" />
     <Compile Include="DefaultArgumentsAttribute.cs" />

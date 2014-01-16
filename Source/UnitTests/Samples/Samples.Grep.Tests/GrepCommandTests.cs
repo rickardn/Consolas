@@ -1,6 +1,7 @@
 ﻿using ConsoleApp.Core;
 using NSubstitute;
 using NUnit.Framework;
+using Samples.Grep.Args;
 using Samples.Grep.Commands;
 
 namespace Samples.Grep.Tests

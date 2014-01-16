@@ -1,0 +1,9 @@
+﻿@model Samples.Ping.Models.PingViewModel
+
+
+Pinging @Model.Host with @Model.Bytes bytes of data:
+@for (var i = 0; i < Model.Times; i++)
+{
+	var line = Model.Ping();
+<text>Reply from @line.Host: bytes:@line.Bytes time@(line.RoundTripTime) TTL=@line.Ttl</text>
+}
