@@ -59,6 +59,7 @@
     <Compile Include="ActivatorCommandFactory.cs" />
     <Compile Include="Argument.cs" />
     <Compile Include="ArgumentMatcher.cs" />
+    <Compile Include="ArgumentLL2Parser.cs" />
     <Compile Include="ArgumentParser.cs" />
     <Compile Include="ArgumentSet.cs" />
     <Compile Include="Command.cs" />
@@ -67,9 +68,13 @@
     <Compile Include="DefaultArgumentsAttribute.cs" />
     <Compile Include="ICommandFactory.cs" />
     <Compile Include="IConsole.cs" />
+    <Compile Include="Lexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue.cs" />
     <Compile Include="SimpleInjectorCommandFactory.cs" />
+    <Compile Include="StringTokenizer.cs" />
     <Compile Include="SystemConsole.cs" />
+    <Compile Include="Tokens.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
