@@ -8,11 +8,9 @@ namespace ConsoleApp.Core
     public class ArgumentMatcher
     {
         public List<Type> Types { get; set; }
-        public List<string> Prefixes { get; set; }
 
         public ArgumentMatcher()
         {
-            Prefixes = new List<string> {"--", "-", "/"};
             Types = new List<Type>();
         }
 
@@ -59,9 +57,7 @@ namespace ConsoleApp.Core
 
         private void SetPropertyValue(Type type, KeyValuePair<string, Argument> argument, object instance)
         {
-            var argumentName = RemovePrefix(argument.Key);
-
-            var propertyInfo = GetPropertyInfo(type, argumentName);
+            var propertyInfo = GetPropertyInfo(type, argument.Key);
             if (propertyInfo != null)
             {
                 SetValue(propertyInfo, instance, argument);
@@ -87,13 +83,13 @@ namespace ConsoleApp.Core
 
         private static ArgumentSet Parse(string[] args)
         {
-            var parser = new ArgumentParser();
+            var parser = new ArgumentLL2Parser();
             return parser.Parse(args, new ArgumentSet());
         }
 
         private Type Match(ArgumentSet arguments)
         {
-            bool useDefault = arguments.Count == 0 || !HasPrefix(arguments.First().Key);
+            bool useDefault = arguments.Any(a => a.Value.IsDefault);
 
             foreach (var type in Types)
             {
@@ -104,7 +100,7 @@ namespace ConsoleApp.Core
 
                 foreach (var argument in arguments)
                 {
-                    if (isDefaultArgs && useDefault && !HasPrefix(argument.Key))
+                    if (isDefaultArgs && useDefault && argument.Value.IsDefault)
                     {
                         isMatch = true;
                         argument.Value.IsDefault = true;
@@ -112,9 +108,7 @@ namespace ConsoleApp.Core
                     }
                     else
                     {
-                        var argumentName = RemovePrefix(argument.Key);
-
-                        if (GetPropertyInfo(type, argumentName) != null)
+                        if (GetPropertyInfo(type, argument.Key) != null)
                         {
                             isMatch = true;
                         }
@@ -130,26 +124,10 @@ namespace ConsoleApp.Core
             return null;
         }
 
-        private bool HasPrefix(string key)
-        {
-            return Prefixes.Any(key.StartsWith);
-        }
-
         private static PropertyInfo GetPropertyInfo(Type type, string argumentName)
         {
             return type.GetProperty(argumentName,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-        }
-
-        private string RemovePrefix(string key)
-        {
-            string[] arg = {key};
-
-            foreach (var prefix in Prefixes.Where(prefix => arg[0].StartsWith(prefix)))
-            {
-                arg[0] = arg[0].Substring(prefix.Length);
-            }
-            return arg[0];
         }
     }
 }
