@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class ArgumentSet : Dictionary<string, Argument>
     {

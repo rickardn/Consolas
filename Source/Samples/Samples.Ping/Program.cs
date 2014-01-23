@@ -1,10 +1,10 @@
-﻿using ConsoleApp.Core;
+﻿using Consolas.Core;
 using Samples.Ping.Models;
 using SimpleInjector;
 
 namespace Samples.Ping
 {
-    public class Program : ConsoleApp.Core.ConsoleApp
+    public class Program : Consolas.Core.ConsoleApp
     {
         public static void Main(string[] args)
         {

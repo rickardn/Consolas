@@ -1,7 +1,7 @@
-﻿using ConsoleApp.Core.Tests.Helpers;
+﻿using Consolas.Core.Tests.Helpers;
 using NUnit.Framework;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class CommandTests : ConsoleTest

@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Core
+﻿namespace Consolas.Core
 {
     public class ArgumentParser
     {

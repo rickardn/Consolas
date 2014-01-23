@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Core;
+﻿using Consolas.Core;
 using NSubstitute;
 using NUnit.Framework;
 using Samples.Grep.Args;

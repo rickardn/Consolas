@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Should;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class ArgumentLL2ParserTests
@@ -201,7 +201,24 @@ namespace ConsoleApp.Core.Tests
             result.Count.ShouldEqual(1);
             result["bool"].Value.ShouldEqual("False");
         }
-        
+
+        [TestCase(new[] { "--/name", "value" }, null)]
+        [TestCase(new[] { "---name", "value" }, null)]
+        [TestCase(new[] { "--+name", "value" }, null)]
+        [TestCase(new[] { "-+name", "value" }, null)]
+        [TestCase(new[] { "/-name", "value" }, null)]
+        [TestCase(new[] { "//name", "value" }, null)]
+        [TestCase(new[] { "-name!", "value" }, null)]
+        [TestCase(new[] { "-name ", "value" }, null)]
+        [TestCase(new[] { "- name", "value" }, null)]
+        [TestCase(new[] { " name", "value" }, null)]
+        [TestCase(new[] { "-name_", "value" }, null)]
+        [TestCase(new[] { "-_name", "value" }, null)]
+        public void Parse_InvalidName_ThrowsException(string[] args, string s)
+        {
+            Assert.Throws<Exception>(() => Parse(args));
+        }
+
         private ArgumentSet Parse(string[] args)
         {
             return _parser.Parse(args, new ArgumentSet());

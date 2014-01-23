@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Core.Tests.Helpers
+namespace Consolas.Core.Tests.Helpers
 {
     public class CommandThrowsException
     {

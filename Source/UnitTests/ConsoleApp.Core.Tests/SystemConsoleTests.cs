@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class SystemConsoleTests : ConsoleTest

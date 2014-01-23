@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using ConsoleApp.Core;
+using Consolas.Core;
 using Samples.Grep.Args;
 
 namespace Samples.Grep.Commands

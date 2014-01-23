@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Core;
+﻿using Consolas.Core;
 using Samples.Ping.Models;
 
 namespace Samples.Ping.Commands

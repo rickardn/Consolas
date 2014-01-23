@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class ArgumentLL2Parser
     {
@@ -155,7 +155,14 @@ namespace ConsoleApp.Core
         {
             if (_queue.Count == 0)
                 throw UnexpectedEnd("name");
-            return Dequeue();
+            
+            var name = Peek();
+
+            if (Tokens.Name.IsMatch(name))
+            {
+                return Dequeue();
+            }
+            throw Error(name, "name");
         }
 
         private void Operator()

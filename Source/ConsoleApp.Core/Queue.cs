@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class Queue<T> : IEnumerable<T>, ICollection
     {

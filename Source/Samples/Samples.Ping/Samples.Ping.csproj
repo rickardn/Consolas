@@ -68,9 +68,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">
+    <ProjectReference Include="..\..\ConsoleApp.Core\Consolas.Core.csproj">
       <Project>{d5234497-2f14-45d8-a896-ecaa18c20eff}</Project>
-      <Name>ConsoleApp.Core</Name>
+      <Name>Consolas.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

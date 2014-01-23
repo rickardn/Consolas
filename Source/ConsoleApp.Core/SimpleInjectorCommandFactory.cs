@@ -1,7 +1,7 @@
 ﻿using System;
 using SimpleInjector;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class SimpleInjectorCommandFactory : ICommandFactory
     {

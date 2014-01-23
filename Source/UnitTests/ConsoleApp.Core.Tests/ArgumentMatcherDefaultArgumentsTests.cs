@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConsoleApp.Core.Tests.Helpers;
+using Consolas.Core.Tests.Helpers;
 using NUnit.Framework;
 using Should;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class ArgumentMatcherDefaultArgumentsTests

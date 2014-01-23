@@ -2,7 +2,7 @@
 using System.IO;
 using RazorEngine;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public abstract class Command
     {
@@ -11,6 +11,11 @@ namespace ConsoleApp.Core
             var text = GetView(viewName);
             var result = Razor.Parse(text, model);
             Console.Write(result);
+        }
+
+        public void Render(string viewName)
+        {
+            Render<object>(viewName, null);
         }
 
         private string GetView(string viewName)

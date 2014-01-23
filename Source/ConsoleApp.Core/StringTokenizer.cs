@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class StringTokenizer
     {

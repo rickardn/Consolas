@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public class ArgumentMatcher
     {

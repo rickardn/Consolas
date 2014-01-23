@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public interface ICommandFactory
     {

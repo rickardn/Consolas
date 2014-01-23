@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using NUnit.Framework;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     public abstract class ConsoleTest
     {

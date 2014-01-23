@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using SimpleInjector;
 
-namespace ConsoleApp.Core
+namespace Consolas.Core
 {
     public abstract class ConsoleApp
     {

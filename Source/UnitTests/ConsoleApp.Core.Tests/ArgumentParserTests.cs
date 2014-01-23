@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Should;
 
-namespace ConsoleApp.Core.Tests
+namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class ArgumentParserTests

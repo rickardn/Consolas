@@ -1,10 +1,10 @@
-﻿namespace ConsoleApp.Core
+﻿namespace Consolas.Core
 {
     public class Lexer
     {
         private readonly StringTokenizer _stringTokenizer = new StringTokenizer
         {
-            Operators = new[] { " ", "--", "-", "/", "+", ":", "=" }
+            Operators = Tokens.Operators
         };
 
         public Queue<string> Tokenize(string[] args)

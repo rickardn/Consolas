@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Core.Tests;
+﻿using Consolas.Core.Tests;
 using NUnit.Framework;
 
 namespace Samples.Ping.Tests

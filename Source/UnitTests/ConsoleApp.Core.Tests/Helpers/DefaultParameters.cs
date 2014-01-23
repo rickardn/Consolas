@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Core.Tests.Helpers
+﻿namespace Consolas.Core.Tests.Helpers
 {
     [DefaultArguments]
     public class DefaultParameters

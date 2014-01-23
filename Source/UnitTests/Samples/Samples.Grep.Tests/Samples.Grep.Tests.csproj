@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">
+    <ProjectReference Include="..\..\..\ConsoleApp.Core\Consolas.Core.csproj">
       <Project>{D5234497-2F14-45D8-A896-ECAA18C20EFF}</Project>
-      <Name>ConsoleApp.Core</Name>
+      <Name>Consolas.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Samples.Grep\Samples.Grep.csproj">
       <Project>{0a42770c-86d6-4a75-ba7f-b1ec1cba5008}</Project>

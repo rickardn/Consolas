@@ -57,17 +57,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ConsoleApp.Core\ConsoleApp.Core.csproj">
+    <ProjectReference Include="..\..\..\ConsoleApp.Core\Consolas.Core.csproj">
       <Project>{d5234497-2f14-45d8-a896-ecaa18c20eff}</Project>
-      <Name>ConsoleApp.Core</Name>
+      <Name>Consolas.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Samples.Ping\Samples.Ping.csproj">
       <Project>{e19f555a-6e76-4b70-8184-e3ee2f4d65f8}</Project>
       <Name>Samples.Ping</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ConsoleApp.Core.Tests\ConsoleApp.Core.Tests.csproj">
+    <ProjectReference Include="..\..\ConsoleApp.Core.Tests\Consolas.Core.Tests.csproj">
       <Project>{D423725D-FCE3-4932-90AA-99ED4F007772}</Project>
-      <Name>ConsoleApp.Core.Tests</Name>
+      <Name>Consolas.Core.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
