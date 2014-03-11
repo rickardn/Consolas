@@ -2,7 +2,7 @@ Consolas is a console application framework that simplyfies the creation of aver
 
 #Simple example
 
-<pre>
+```csharp
 class Program : ConsoleApp
 {
     static void Main(string[] args)
@@ -23,7 +23,7 @@ public class HelpCommand : Command
         return "Using: Program.exe ...";
     }
 }
-</pre>
+```
 
 #Running the above program from a console
 
