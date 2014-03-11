@@ -2,7 +2,7 @@
 
 namespace Consolas.Core
 {
-    public class Tokens
+    public static class Tokens
     {
         public static readonly Regex Prefix = new Regex("^--|-|/", RegexOptions.Compiled);
         public static readonly Regex Operator = new Regex("=|:", RegexOptions.Compiled);
