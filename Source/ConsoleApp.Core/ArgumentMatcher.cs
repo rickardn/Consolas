@@ -96,7 +96,7 @@ namespace Consolas.Core
                 var customAttributes = type.GetCustomAttributes(typeof (DefaultArgumentsAttribute), false);
                 var isDefaultArgs = customAttributes.Length > 0;
 
-                bool isMatch = false;
+                bool isMatch = isDefaultArgs && arguments.Count == 0;
 
                 foreach (var argument in arguments)
                 {

@@ -28,6 +28,12 @@ namespace Consolas.Core.Tests
         }
 
         [Test]
+        public void MatchToObject_NoParameters_MatchesFirstDefaultArgument()
+        {
+            MatchToObject(new string[0]).ShouldNotBeNull();
+        }
+
+        [Test]
         public void MatchToObject_NoParameterName_MatchesFirstDefaultArgument()
         {
             MatchToObject(new[] { "foo" }).ShouldNotBeNull();
