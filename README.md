@@ -1,8 +1,16 @@
 Consolas is a console application framework that simplyfies the creation of averything from simple throw away apps to bigger, more complex tools with lots of arguments.
 
-#Simple example
+#How to get it
+
+Simply create a new Console Application and install the Nuget package [Consolas](https://www.nuget.org/packages/Consolas/) or run the following command in the Package Manager Console
 
 <pre>
+PM> Install-Package Consolas
+</pre>
+
+#Simple example
+
+```csharp
 class Program : ConsoleApp
 {
     static void Main(string[] args)
@@ -23,7 +31,7 @@ public class HelpCommand : Command
         return "Using: Program.exe ...";
     }
 }
-</pre>
+```
 
 #Running the above program from a console
 
