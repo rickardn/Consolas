@@ -1,5 +1,11 @@
 Consolas is a console application framework that simplyfies the creation of averything from simple throw away apps to bigger, more complex tools with lots of arguments.
 
+#Features
+- Convention over configuration
+- Small fingerprint
+- Testable
+- Razor view engine
+
 #How to get it
 
 Simply create a new Console Application and install the Nuget package [Consolas](https://www.nuget.org/packages/Consolas/) or run the following command in the Package Manager Console
@@ -33,12 +39,16 @@ public class HelpCommand : Command
 }
 ```
 
-#Running the above program from a console
+##Running the above program from a console
 
 <pre>
 C> program.exe -Help
 Using: Program.exe ...
 </pre>
+
+#Advanced examples
+- [Classic UNIX grep sample](https://github.com/rickardn/Consolas/tree/master/Source/Samples/Samples.Grep)
+- [Ping a network address](https://github.com/rickardn/Consolas/tree/master/Source/Samples/Samples.Ping)
 
 #License
 
