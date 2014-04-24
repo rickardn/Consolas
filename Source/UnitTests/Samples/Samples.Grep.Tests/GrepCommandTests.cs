@@ -1,6 +1,4 @@
-﻿using Consolas.Core;
-using NSubstitute;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Samples.Grep.Args;
 using Samples.Grep.Commands;
 
@@ -12,8 +10,7 @@ namespace Samples.Grep.Tests
         [Test]
         public void Execute_ValidArgument_ReturnsGrepedText()
         {
-            var console = Substitute.For<IConsole>();
-            var command = new GrepCommand(console);
+            var command = new GrepCommand();
 
             var result = command.Execute(new GrepArgs
             {
