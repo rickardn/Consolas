@@ -8,13 +8,6 @@ namespace Samples.Grep.Commands
 {
     public class GrepCommand
     {
-        private readonly IConsole _console;
-
-        public GrepCommand(IConsole console)
-        {
-            _console = console;
-        }
-
         public string Execute(GrepArgs args)
         {
             var buffer = new StringBuilder();
