@@ -1,4 +1,5 @@
 ﻿using Consolas.Core.Tests.Helpers;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Consolas.Core.Tests
@@ -11,7 +12,16 @@ namespace Consolas.Core.Tests
         [SetUp]
         public void BeforeEach()
         {
-            _command = new DescendantCommand();
+            var viewEngineFactory = Substitute.For<IViewEngineFactory>();
+
+            _command = new DescendantCommand()
+            {
+                ViewEngines = viewEngineFactory
+            };
+
+            viewEngineFactory
+                .CreateEngine(Arg.Any<Command>(), Arg.Any<string>())
+                .ReturnsForAnyArgs(new RazorViewEngine(_command));
         }
 
         [Test]

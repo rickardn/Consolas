@@ -27,6 +27,7 @@ namespace Consolas.Core
             if (match == null)
                 return null;
 
+            // TODO: should not use Command Builder to build argument object
             var instance = CommandBuilder.Current.GetCommandInstance(type);
 
             var i = 0;

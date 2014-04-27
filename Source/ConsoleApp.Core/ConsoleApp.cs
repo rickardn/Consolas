@@ -9,9 +9,10 @@ namespace Consolas.Core
 {
     public abstract class ConsoleApp
     {
+        protected static Container Container;
+
         private const string InitMethodName = "Match";
         private const string ExecuteMethod = "Execute";
-        internal static Container Container;
         private ArgumentMatcher _argumentMatcher;
 
         public virtual void Configure(Container container) {}
@@ -42,9 +43,12 @@ namespace Consolas.Core
         private static void Configure(ConsoleApp app)
         {
             Container = new Container();
-            CommandBuilder.Current.SetCommandFactory(
-                new SimpleInjectorCommandFactory(Container));
+            CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(Container));
+            Container.Register<IDependencyResolver, SimpleInjectorDependencyResolver>();
+            Container.Register<IViewEngineFactory, ViewEngineFactory>();
+            Container.RegisterInitializer<Command>(command => command.ViewEngines = Container.GetInstance<IViewEngineFactory>());
             app.Configure(Container);
+            Container.Verify();
         }
 
         private static ConsoleApp CreateConsoleApp()

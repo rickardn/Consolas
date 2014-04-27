@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace Samples.Grep
 {
-    public class Program : Consolas.Core.ConsoleApp
+    public class Program : ConsoleApp
     {
         public static void Main(string[] args)
         {

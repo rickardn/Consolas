@@ -1,12 +1,25 @@
 ﻿using System;
 using Consolas.Core.Tests.Helpers;
 using NUnit.Framework;
+using Should;
 
 namespace Consolas.Core.Tests
 {
     [TestFixture]
     public class ConsoleAppBaseTests : ConsoleTest
     {
+        [Test]
+        public void Match_WhenCalled_RegisterSystemDependencies()
+        {
+            var sut = new SimpleConsoleApp();
+            sut.Main(new string[0]);
+            var container = sut.DependencyContainer;
+
+            container.GetInstance<IViewEngineFactory>().ShouldNotBeNull();
+            container.GetInstance<IDependencyResolver>().ShouldNotBeNull();
+            container.GetInstance<DescendantCommand>().ViewEngines.ShouldNotBeNull();
+        }
+
         [Test]
         public void Match_EndToEndTest()
         {

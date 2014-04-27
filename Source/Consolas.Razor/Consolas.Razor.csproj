@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5234497-2F14-45D8-A896-ECAA18C20EFF}</ProjectGuid>
+    <ProjectGuid>{22A5766C-CDDA-4C01-BB23-D907918E9009}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Consolas.Core</RootNamespace>
-    <AssemblyName>Consolas.Core</AssemblyName>
+    <RootNamespace>Consolas.Razor</RootNamespace>
+    <AssemblyName>Consolas.Razor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,18 +28,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.4.0\lib\net45\RazorEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SimpleInjector.2.4.0\lib\net40-client\SimpleInjector.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Diagnostics">
-      <HintPath>..\packages\SimpleInjector.2.4.0\lib\net40-client\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,29 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActivatorCommandFactory.cs" />
-    <Compile Include="Argument.cs" />
-    <Compile Include="ArgumentMatcher.cs" />
-    <Compile Include="ArgumentLL2Parser.cs" />
-    <Compile Include="ArgumentParser.cs" />
-    <Compile Include="ArgumentSet.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandBuilder.cs" />
-    <Compile Include="ConsoleApp.cs" />
-    <Compile Include="DefaultArgumentsAttribute.cs" />
-    <Compile Include="ICommandFactory.cs" />
-    <Compile Include="IConsole.cs" />
-    <Compile Include="IDependencyResolver.cs" />
-    <Compile Include="IViewEngine.cs" />
-    <Compile Include="IViewEngineFactory.cs" />
-    <Compile Include="Lexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queue.cs" />
-    <Compile Include="RazorViewEngine.cs" />
-    <Compile Include="SimpleInjectorCommandFactory.cs" />
-    <Compile Include="StringTokenizer.cs" />
-    <Compile Include="SystemConsole.cs" />
-    <Compile Include="Tokens.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

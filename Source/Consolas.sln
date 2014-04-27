@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ping", "Ping", "{82DA1018-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Ping.Tests", "UnitTests\Samples\Samples.Ping.Tests\Samples.Ping.Tests.csproj", "{7AF6841A-1C4C-427E-9E7B-01954EEF82DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consolas.Razor", "Consolas.Razor\Consolas.Razor.csproj", "{22A5766C-CDDA-4C01-BB23-D907918E9009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{7AF6841A-1C4C-427E-9E7B-01954EEF82DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AF6841A-1C4C-427E-9E7B-01954EEF82DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AF6841A-1C4C-427E-9E7B-01954EEF82DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A5766C-CDDA-4C01-BB23-D907918E9009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A5766C-CDDA-4C01-BB23-D907918E9009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A5766C-CDDA-4C01-BB23-D907918E9009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A5766C-CDDA-4C01-BB23-D907918E9009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
