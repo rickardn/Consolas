@@ -1,7 +1,14 @@
-﻿namespace Consolas.Core
+﻿using System;
+
+namespace Consolas.Core
 {
     public interface IViewEngine
     {
-        void Render<T>(string viewName, T model);
+        IView FindView(Command command, string viewName);
+    }
+
+    public interface IView
+    {
+        void Render<T>(T model);
     }
 }

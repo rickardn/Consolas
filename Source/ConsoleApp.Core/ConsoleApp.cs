@@ -9,13 +9,23 @@ namespace Consolas.Core
 {
     public abstract class ConsoleApp
     {
+        /// <summary>
+        /// A collection of view engines. Use this property to add new view engines 
+        /// to the application.
+        /// </summary>
+        protected ViewEngineCollection ViewEngines { get; set; }
+
+        /// <summary>
+        /// Overide to setup dependencies and configure your console application.
+        /// </summary>
+        /// <param name="container"></param>
+        protected virtual void Configure(Container container) {}
+
         protected static Container Container;
 
         private const string InitMethodName = "Match";
         private const string ExecuteMethod = "Execute";
         private ArgumentMatcher _argumentMatcher;
-
-        public virtual void Configure(Container container) {}
 
         protected static void Match(string[] args)
         {
@@ -43,10 +53,15 @@ namespace Consolas.Core
         private static void Configure(ConsoleApp app)
         {
             Container = new Container();
+            Container.Options.AllowOverridingRegistrations = true;
+            
+            app.ViewEngines = new ViewEngineCollection();
+            Container.RegisterInitializer<Command>(command =>
+            {
+                command.ViewEngines = app.ViewEngines;
+            });
+
             CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(Container));
-            Container.Register<IDependencyResolver, SimpleInjectorDependencyResolver>();
-            Container.Register<IViewEngineFactory, ViewEngineFactory>();
-            Container.RegisterInitializer<Command>(command => command.ViewEngines = Container.GetInstance<IViewEngineFactory>());
             app.Configure(Container);
             Container.Verify();
         }

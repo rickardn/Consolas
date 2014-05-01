@@ -1,4 +1,6 @@
-﻿using Consolas.Core.Tests.Helpers;
+﻿using System.ComponentModel;
+using Consolas.Core.Tests.Helpers;
+using Consolas.Razor;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -12,16 +14,11 @@ namespace Consolas.Core.Tests
         [SetUp]
         public void BeforeEach()
         {
-            var viewEngineFactory = Substitute.For<IViewEngineFactory>();
-
             _command = new DescendantCommand()
             {
-                ViewEngines = viewEngineFactory
+                ViewEngines = new ViewEngineCollection()
             };
-
-            viewEngineFactory
-                .CreateEngine(Arg.Any<Command>(), Arg.Any<string>())
-                .ReturnsForAnyArgs(new RazorViewEngine(_command));
+            _command.ViewEngines.Add<RazorViewEngine>();
         }
 
         [Test]

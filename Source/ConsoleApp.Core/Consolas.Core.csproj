@@ -33,9 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RazorEngine">
-      <HintPath>..\packages\RazorEngine.3.4.0\lib\net45\RazorEngine.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SimpleInjector.2.4.0\lib\net40-client\SimpleInjector.dll</HintPath>
@@ -45,10 +42,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,17 +61,17 @@
     <Compile Include="DefaultArgumentsAttribute.cs" />
     <Compile Include="ICommandFactory.cs" />
     <Compile Include="IConsole.cs" />
-    <Compile Include="IDependencyResolver.cs" />
     <Compile Include="IViewEngine.cs" />
     <Compile Include="IViewEngineFactory.cs" />
     <Compile Include="Lexer.cs" />
+    <Compile Include="ManifestResourcePathViewEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queue.cs" />
-    <Compile Include="RazorViewEngine.cs" />
     <Compile Include="SimpleInjectorCommandFactory.cs" />
     <Compile Include="StringTokenizer.cs" />
     <Compile Include="SystemConsole.cs" />
     <Compile Include="Tokens.cs" />
+    <Compile Include="ViewEngineCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

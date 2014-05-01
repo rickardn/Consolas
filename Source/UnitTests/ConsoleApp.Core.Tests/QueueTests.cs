@@ -104,5 +104,19 @@ namespace Consolas.Core.Tests
 
             array.ShouldEqual(new []{"foo"});
         }
+
+        [Test]
+        public void SyncRoot_ShouldNotBeNull()
+        {
+            var que = new Queue<int>();
+            que.SyncRoot.ShouldNotBeNull();
+        }
+
+        [Test]
+        public void IsSynchronized_ShouldBeFalse()
+        {
+            var que = new Queue<int>();
+            que.IsSynchronized.ShouldBeFalse();
+        }
     }
 }

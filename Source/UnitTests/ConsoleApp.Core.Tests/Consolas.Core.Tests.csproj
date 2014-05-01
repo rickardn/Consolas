@@ -66,7 +66,6 @@
     <Compile Include="LexerTests.cs" />
     <Compile Include="ArgumentLL2ParserTests.cs" />
     <Compile Include="ArgumentParserTests.cs" />
-    <Compile Include="CommandTests.cs" />
     <Compile Include="ConsoleAppBaseTests.cs" />
     <Compile Include="ConsoleTest.cs" />
     <Compile Include="Helpers\ArgumentWithoutCommand.cs" />
@@ -88,10 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\View.cstxt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="Views\ResourceView.cstxt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\Consolas.Core.csproj">
@@ -99,6 +94,7 @@
       <Name>Consolas.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
