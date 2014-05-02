@@ -1,4 +1,6 @@
-﻿namespace Consolas.Core.Tests.Helpers
+﻿using Consolas.Core;
+
+namespace Consolas.Razor.Tests.Helpers
 {
     public class DescendantCommand : Command
     {

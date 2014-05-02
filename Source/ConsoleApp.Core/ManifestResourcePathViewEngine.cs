@@ -24,6 +24,7 @@ namespace Consolas.Core
 
         private string GetFileView(string viewName, Assembly assembly)
         {
+            string fileView = null;
             var assemblyDirectory = new FileInfo(assembly.Location).Directory;
 
             if (assemblyDirectory != null)
@@ -37,16 +38,17 @@ namespace Consolas.Core
                     if (File.Exists(location))
                     {
                         {
-                            return File.ReadAllText(location);
+                            fileView = File.ReadAllText(location);
                         }
                     }
                 }
             }
-            return null;
+            return fileView;
         }
 
         private string GetManifestResouceView(string viewName, Assembly assembly)
         {
+            string resourceView = null;
             var names = assembly.GetManifestResourceNames();
 
             foreach (var name in names)
@@ -58,12 +60,12 @@ namespace Consolas.Core
                         var manifestResourceStream = assembly.GetManifestResourceStream(name);
                         if (manifestResourceStream != null)
                         {
-                            return new StreamReader(manifestResourceStream).ReadToEnd();
+                            resourceView = new StreamReader(manifestResourceStream).ReadToEnd();
                         }
                     }
                 }
             }
-            return null;
+            return resourceView;
         }
     }
 }

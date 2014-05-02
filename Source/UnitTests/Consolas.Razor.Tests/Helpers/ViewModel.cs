@@ -1,4 +1,4 @@
-﻿namespace Consolas.Core.Tests.Helpers
+﻿namespace Consolas.Razor.Tests.Helpers
 {
     public class ViewModel
     {

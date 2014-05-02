@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nustache.Core">
+      <HintPath>..\packages\Nustache.1.13.8.22\lib\net20\Nustache.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SimpleInjector.2.4.0\lib\net40-client\SimpleInjector.dll</HintPath>
@@ -57,6 +60,8 @@
     <Compile Include="ArgumentSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandBuilder.cs" />
+    <Compile Include="Consolas.Mustache\MustacheView.cs" />
+    <Compile Include="Consolas.Mustache\MustacheViewEngine.cs" />
     <Compile Include="ConsoleApp.cs" />
     <Compile Include="DefaultArgumentsAttribute.cs" />
     <Compile Include="ICommandFactory.cs" />
@@ -76,6 +81,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

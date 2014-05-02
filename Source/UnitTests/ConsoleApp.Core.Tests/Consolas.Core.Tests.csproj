@@ -80,6 +80,7 @@
     <Compile Include="Helpers\SingleParameter.cs" />
     <Compile Include="Helpers\TwoParameters.cs" />
     <Compile Include="Helpers\ViewModel.cs" />
+    <Compile Include="Mustache\MustacheCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueTests.cs" />
     <Compile Include="StringTokenizerTests.cs" />
@@ -87,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\View.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Views\ResourceView.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\Consolas.Core.csproj">

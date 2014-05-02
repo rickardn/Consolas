@@ -1,3 +1,3 @@
-﻿@model Consolas.Core.Tests.Helpers.ViewModel
+﻿@model Consolas.Razor.Tests.Helpers.ViewModel
 
 View @Model.Message

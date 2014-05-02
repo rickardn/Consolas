@@ -1,24 +1,24 @@
-﻿using Consolas.Core;
-using Consolas.Razor.Tests.Helpers;
+﻿using Consolas.Core.Consolas.Mustache;
+using Consolas.Core.Tests.Helpers;
 using NUnit.Framework;
 using SimpleInjector;
 
-namespace Consolas.Razor.Tests
+namespace Consolas.Core.Tests.Mustache
 {
     [TestFixture]
-    public class CommandTests : ConsoleTest
+    public class MustacheCommandTests : ConsoleTest
     {
         private DescendantCommand _command;
 
         [SetUp]
         public void BeforeEach()
         {
-           var container = new Container();
+            var container = new Container();
             _command = new DescendantCommand()
             {
                 ViewEngines = new ViewEngineCollection(container)
             };
-            _command.ViewEngines.Add<RazorViewEngine>();
+            _command.ViewEngines.Add<MustacheViewEngine>();
         }
 
         [Test]

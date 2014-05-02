@@ -7,30 +7,34 @@ using SimpleInjector;
 
 namespace Consolas.Core
 {
+    /// <summary>
+    ///     Defines the methods and properties that are common to all application objects in a Console application. This class
+    ///     is the base class for applications that are defined by the user in a Program.cs file
+    /// </summary>
     public abstract class ConsoleApp
     {
         /// <summary>
-        /// A collection of view engines. Use this property to add new view engines 
-        /// to the application.
+        ///     A collection of view engines. Use this property to add new view engines
+        ///     to the application.
         /// </summary>
-        protected ViewEngineCollection ViewEngines { get; set; }
+        public ViewEngineCollection ViewEngines { get; set; }
 
         /// <summary>
-        /// Overide to setup dependencies and configure your console application.
+        ///     Overide to configure your console application and register dependencies.
         /// </summary>
         /// <param name="container"></param>
-        protected virtual void Configure(Container container) {}
+        public virtual void Configure(Container container) {}
 
-        protected static Container Container;
-
-        private const string InitMethodName = "Match";
-        private const string ExecuteMethod = "Execute";
-        private ArgumentMatcher _argumentMatcher;
-
+        /// <summary>
+        ///     Call <see cref="Match"/> in your Main method to start matching program arguments to commands in the application.
+        /// </summary>
+        /// <param name="args"></param>
         protected static void Match(string[] args)
         {
             #region Do not refactor
+
             Assembly callingAssembly = Assembly.GetCallingAssembly();
+
             #endregion
 
             ConsoleApp app = CreateConsoleApp();
@@ -50,20 +54,25 @@ namespace Consolas.Core
             }
         }
 
+        private const string InitMethodName = "Match";
+
+        private const string ExecuteMethod = "Execute";
+
+        private ArgumentMatcher _argumentMatcher;
+
+        private static Container _container;
+
         private static void Configure(ConsoleApp app)
         {
-            Container = new Container();
-            Container.Options.AllowOverridingRegistrations = true;
-            
-            app.ViewEngines = new ViewEngineCollection();
-            Container.RegisterInitializer<Command>(command =>
-            {
-                command.ViewEngines = app.ViewEngines;
-            });
+            _container = new Container();
+            _container.Options.AllowOverridingRegistrations = true;
 
-            CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(Container));
-            app.Configure(Container);
-            Container.Verify();
+            app.ViewEngines = new ViewEngineCollection(_container);
+            _container.RegisterInitializer<Command>(command => { command.ViewEngines = app.ViewEngines; });
+
+            CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
+            app.Configure(_container);
+            _container.Verify();
         }
 
         private static ConsoleApp CreateConsoleApp()
@@ -74,7 +83,7 @@ namespace Consolas.Core
 
             // ReSharper disable PossibleNullReferenceException
             foreach (StackFrame frame in stackFrames)
-            // ReSharper restore PossibleNullReferenceException
+                // ReSharper restore PossibleNullReferenceException
             {
                 var method = frame.GetMethod();
                 if (method.Name != InitMethodName)
@@ -103,7 +112,7 @@ namespace Consolas.Core
 
             var argsType = _argumentMatcher.Match(args);
             var commandType = FindMatchingCommandType(argTypes, argsType);
-            
+
             if (commandType != null)
             {
                 return new CommandType
@@ -116,7 +125,8 @@ namespace Consolas.Core
             if (commandType == null && argsType != null)
             {
                 throw new NotImplementedException(
-                    string.Format("No class with an Execute-method with the class '{0}' as argument could be found", argsType.Name));
+                    string.Format("No class with an Execute-method with the class '{0}' as argument could be found",
+                        argsType.Name));
             }
 
             return null;
@@ -139,7 +149,7 @@ namespace Consolas.Core
             var methodInfo = commandType.GetMethod(ExecuteMethod);
             try
             {
-                var result = methodInfo.Invoke(command.Command, new[] { command.Args });
+                var result = methodInfo.Invoke(command.Command, new[] {command.Args});
                 Console.WriteLine(result);
             }
             catch (Exception e)
@@ -150,7 +160,9 @@ namespace Consolas.Core
 
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
         {
-            return argTypes.FirstOrDefault(x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
+            return
+                argTypes.FirstOrDefault(
+                    x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
         }
 
         private class CommandType
