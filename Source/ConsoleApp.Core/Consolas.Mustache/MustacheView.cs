@@ -1,6 +1,7 @@
 ﻿using System;
+using Consolas.Core;
 
-namespace Consolas.Core.Consolas.Mustache
+namespace Consolas.Mustache
 {
     public class MustacheView : IView
     {

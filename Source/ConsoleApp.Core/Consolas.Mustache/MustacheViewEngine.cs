@@ -1,4 +1,6 @@
-﻿namespace Consolas.Core.Consolas.Mustache
+﻿using Consolas.Core;
+
+namespace Consolas.Mustache
 {
     public class MustacheViewEngine : ManifestResourcePathViewEngine
     {

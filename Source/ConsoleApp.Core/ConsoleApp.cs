@@ -92,11 +92,10 @@ namespace Consolas.Core
                     if (declaringType != null && declaringType.IsAbstract)
                         continue;
 
-                    if (declaringType != null)
-                    {
-                        consoleApp = Activator.CreateInstance(declaringType) as ConsoleApp;
-                        break;
-                    }
+                    if (declaringType == null) continue;
+                    
+                    consoleApp = Activator.CreateInstance(declaringType) as ConsoleApp;
+                    break;
                 }
             }
             return consoleApp;

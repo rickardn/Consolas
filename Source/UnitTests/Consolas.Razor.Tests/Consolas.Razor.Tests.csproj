@@ -37,15 +37,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Should">
-      <HintPath>..\..\packages\Should.1.1.19\lib\Should.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.dll</HintPath>
+      <HintPath>..\..\packages\Should.1.1.20\lib\Should.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=2.5.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.2.5.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector.Diagnostics">
-      <HintPath>..\..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.2.5.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

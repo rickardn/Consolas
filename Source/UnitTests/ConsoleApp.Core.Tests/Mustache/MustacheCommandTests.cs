@@ -1,5 +1,5 @@
-﻿using Consolas.Core.Consolas.Mustache;
-using Consolas.Core.Tests.Helpers;
+﻿using Consolas.Core.Tests.Helpers;
+using Consolas.Mustache;
 using NUnit.Framework;
 using SimpleInjector;
 
