@@ -56,19 +56,16 @@
     <Compile Include="Args\VersionArgs.cs" />
     <Compile Include="Commands\GrepCommand.cs" />
     <Compile Include="Commands\VersionCommand.cs" />
+    <Compile Include="Models\VersionViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="Views\Version.cstxt" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Views\Version.template" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Consolas.Razor\Consolas.Razor.csproj">
-      <Project>{22a5766c-cdda-4c01-bb23-d907918e9009}</Project>
-      <Name>Consolas.Razor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ConsoleApp.Core\Consolas.Core.csproj">
       <Project>{d5234497-2f14-45d8-a896-ecaa18c20eff}</Project>
       <Name>Consolas.Core</Name>

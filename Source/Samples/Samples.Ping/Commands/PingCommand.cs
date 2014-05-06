@@ -12,7 +12,7 @@ namespace Samples.Ping.Commands
             _thread = thread;
         }
 
-        public void Execute(PingArgs args)
+        public object Execute(PingArgs args)
         {
             var viewModel = new PingViewModel
             {
@@ -20,7 +20,7 @@ namespace Samples.Ping.Commands
                 Thread = _thread
             };
 
-            Render("View", viewModel);
+            return View("View", viewModel);
         }
     }
 }

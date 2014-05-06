@@ -1,5 +1,4 @@
-﻿using System;
-using Consolas.Core;
+﻿using Consolas.Core;
 
 namespace Consolas.Mustache
 {
@@ -12,9 +11,9 @@ namespace Consolas.Mustache
             _view = view;
         }
 
-        public void Render<T>(T model)
+        public string Render<T>(T model)
         {
-            Console.WriteLine(Nustache.Core.Render.StringToString(_view, model));
+            return Nustache.Core.Render.StringToString(_view, model);
         }
     }
 }

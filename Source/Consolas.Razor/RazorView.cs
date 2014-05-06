@@ -1,5 +1,4 @@
-﻿using System;
-using Consolas.Core;
+﻿using Consolas.Core;
 
 namespace Consolas.Razor
 {
@@ -12,9 +11,9 @@ namespace Consolas.Razor
             _view = view;
         }
 
-        public void Render<T>(T model)
+        public string Render<T>(T model)
         {
-            Console.WriteLine(RazorEngine.Razor.Parse(_view, model));
+            return RazorEngine.Razor.Parse(_view, model);
         }
     }
 }

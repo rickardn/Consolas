@@ -64,6 +64,7 @@
     <Compile Include="AcitvatorCommandFactoryTests.cs" />
     <Compile Include="ArgumentMatcherDefaultArgumentsTests.cs" />
     <Compile Include="ArgumentMatcherTests.cs" />
+    <Compile Include="CommandTests.cs" />
     <Compile Include="ContainerTests.cs" />
     <Compile Include="ITestService.cs" />
     <Compile Include="LexerTests.cs" />

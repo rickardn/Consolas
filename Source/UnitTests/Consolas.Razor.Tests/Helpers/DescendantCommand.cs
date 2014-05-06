@@ -6,20 +6,18 @@ namespace Consolas.Razor.Tests.Helpers
     {
         public void RenderFileView(string message)
         {
-            var model = new ViewModel
+            Render("View", new ViewModel
             {
                 Message = message
-            };
-            Render("View", model);
+            });
         }
 
         public void RenderResourceView(string message)
         {
-            var model = new ViewModel
+            Render("ResourceView", new ViewModel
             {
                 Message = message
-            };
-            Render("ResourceView", model);
+            });
         }
     }
 }

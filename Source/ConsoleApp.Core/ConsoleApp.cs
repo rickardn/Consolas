@@ -68,6 +68,8 @@ namespace Consolas.Core
             _container.Options.AllowOverridingRegistrations = true;
 
             app.ViewEngines = new ViewEngineCollection(_container);
+            
+            // TODO: Remove ViewEngines from command
             _container.RegisterInitializer<Command>(command => { command.ViewEngines = app.ViewEngines; });
 
             CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
@@ -149,6 +151,17 @@ namespace Consolas.Core
             try
             {
                 var result = methodInfo.Invoke(command.Command, new[] {command.Args});
+                
+                var commandResult = result as CommandResult;
+                if (commandResult != null)
+                {
+                    var view = ViewEngines.FindView((Command) command.Command, commandResult.ViewName);
+                    if (view != null)
+                    {
+                        result = view.Render(commandResult.Model);
+                    }
+                }
+
                 Console.WriteLine(result);
             }
             catch (Exception e)

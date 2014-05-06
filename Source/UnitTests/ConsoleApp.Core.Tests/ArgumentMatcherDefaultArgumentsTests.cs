@@ -9,12 +9,12 @@ namespace Consolas.Core.Tests
     [TestFixture]
     public class ArgumentMatcherDefaultArgumentsTests
     {
-        private ArgumentMatcher matcher;
+        private ArgumentMatcher _matcher;
 
         [SetUp]
         public void Setup()
         {
-            matcher = new ArgumentMatcher()
+            _matcher = new ArgumentMatcher()
             {
                 Types = new List<Type>
                 {
@@ -117,7 +117,7 @@ namespace Consolas.Core.Tests
 
         private DefaultParameters MatchToObject(string[] args)
         {
-            return matcher.MatchToObject<DefaultParameters>(args);
+            return _matcher.MatchToObject<DefaultParameters>(args);
         }
     }
 }

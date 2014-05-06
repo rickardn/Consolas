@@ -1,24 +1,57 @@
-﻿namespace Consolas.Core
+﻿using System;
+
+namespace Consolas.Core
 {
     public abstract class Command
     {
         public ViewEngineCollection ViewEngines { get; set; }
 
-        public void Render<T>(string viewName, T model)
+        protected object View(string viewName)
         {
-            if (ViewEngines != null)
-            {
-                var view = ViewEngines.FindView(this, viewName);
-                if (view != null)
-                {
-                    view.Render(model);
-                }
-            }
+            return View<object>(viewName, null);
         }
 
-        public void Render(string viewName)
+        protected object View<T>(string viewName, T model)
+        {
+            return new CommandResult
+            {
+                Model = model,
+                ViewName = viewName
+            };
+        }
+
+        protected void Render(string viewName)
         {
             Render<object>(viewName, null);
+        }
+
+        protected void Render<T>(string viewName, T model)
+        {
+            var view = FindView<T>(viewName);
+            string result;
+
+            if (view != null)
+            {
+                result = view.Render(model);
+            }
+            else
+            {
+                throw new ViewEngineException("No view found for " + viewName);
+            }
+
+            Console.WriteLine(result);
+        }
+
+
+        private IView FindView<T>(string viewName)
+        {
+            IView view = null;
+
+            if (ViewEngines != null)
+            {
+                view = ViewEngines.FindView(this, viewName);
+            }
+            return view;
         }
     }
 }

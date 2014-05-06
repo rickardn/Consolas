@@ -1,6 +1,7 @@
 ﻿using Consolas.Core.Tests.Helpers;
 using Consolas.Mustache;
 using NUnit.Framework;
+using Should;
 using SimpleInjector;
 
 namespace Consolas.Core.Tests.Mustache
@@ -22,17 +23,10 @@ namespace Consolas.Core.Tests.Mustache
         }
 
         [Test]
-        public void Render_ViewAsFile_RendersView()
+        public void Render_NoModelAndViewAsFile_ReturnsView()
         {
-            _command.RenderFileView(message: "foo bar");
-            StringAssert.Contains("View foo bar", ConsoleOut.ToString());
-        }
-
-        [Test]
-        public void Render_ViewAsCompiledResource_RendersView()
-        {
-            _command.RenderResourceView("baz zap");
-            StringAssert.Contains("ResourceView baz zap", ConsoleOut.ToString());
+            _command.RenderFileView();
+            StringAssert.Contains("FileView", ConsoleOut.ToString());
         }
     }
 }

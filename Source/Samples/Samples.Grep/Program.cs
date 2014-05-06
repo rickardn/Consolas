@@ -1,5 +1,5 @@
 ﻿using Consolas.Core;
-using Consolas.Razor;
+using Consolas.Mustache;
 using SimpleInjector;
 
 namespace Samples.Grep
@@ -14,7 +14,7 @@ namespace Samples.Grep
         public override void Configure(Container container)
         {
             container.Register<IConsole,SystemConsole>();
-            ViewEngines.Add<RazorViewEngine>();
+            ViewEngines.Add<MustacheViewEngine>();
         }
     }
 }

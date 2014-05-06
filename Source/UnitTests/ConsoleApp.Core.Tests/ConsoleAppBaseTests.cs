@@ -1,7 +1,6 @@
 ﻿using System;
 using Consolas.Core.Tests.Helpers;
 using NUnit.Framework;
-using Should;
 
 namespace Consolas.Core.Tests
 {

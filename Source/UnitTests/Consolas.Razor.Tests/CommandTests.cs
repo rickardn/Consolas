@@ -22,14 +22,32 @@ namespace Consolas.Razor.Tests
         }
 
         [Test]
-        public void Render_ViewAsFile_RendersView()
+        public void RendersResourceView()
+        {
+            var program = new App();
+            program.Main(new[] {"-Message1", "foobar"});
+
+            StringAssert.Contains("ResourceView foobar", ConsoleOut.ToString());
+        }
+
+        [Test]
+        public void RendersFileView()
+        {
+            var program = new App();
+            program.Main(new[] { "-Message2", "foobar" });
+
+            StringAssert.Contains("FileView foobar", ConsoleOut.ToString());
+        }
+
+        [Test]
+        public void Render_ViewAsFile_ReturnsView()
         {
             _command.RenderFileView(message: "foo bar");
             StringAssert.Contains("View foo bar", ConsoleOut.ToString());
         }
 
         [Test]
-        public void Render_ViewAsCompiledResource_RendersView()
+        public void Render_ViewAsCompiledResource_ReturnsView()
         {
             _command.RenderResourceView("baz zap");
             StringAssert.Contains("ResourceView baz zap", ConsoleOut.ToString());

@@ -5,6 +5,10 @@ using NUnit.Framework;
 
 namespace Samples.Grep.Tests
 {
+    /// <summary>
+    /// Try to keep end-to-end tests to a minimal only doing simple smoke testing ( http://en.wikipedia.org/wiki/Smoke_testing_(software) )
+    /// Focus the testing on the commands in your application.
+    /// </summary>
     [TestFixture]
     public class EndToEndTests
     {

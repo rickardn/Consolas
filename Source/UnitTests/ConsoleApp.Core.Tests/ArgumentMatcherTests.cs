@@ -110,6 +110,15 @@ namespace Consolas.Core.Tests
             result.Bool.ShouldEqual(expected);
         }
 
+        [TestCase(new[] { "-Int", "1" }, 1)]
+        [TestCase(new[] { "-Int", "5" }, 5)]
+        [TestCase(new[] { "-Int" }, 0)]
+        public void MatchToObject_MatchesIntValue(string[] arg, int expected)
+        {
+            var result = matcher.MatchToObject<MultiTypeParameter>(arg);
+            result.Int.ShouldEqual(expected);
+        }
+
         [TestCase(new[] { "/Bool"  }, true)]
         [TestCase(new[] { "-Bool"  }, true)]
         [TestCase(new[] { "--Bool" }, true)]

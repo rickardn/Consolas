@@ -2,22 +2,32 @@
 {
     public class DescendantCommand : Command
     {
-        public void RenderFileView(string message)
+        public object FileView(string message)
         {
             var model = new ViewModel
             {
                 Message = message
             };
-            Render("View", model);
+            return View("View", model);
         }
 
-        public void RenderResourceView(string message)
+        public object FileView()
+        {
+            return View("View");
+        }
+
+        public void RenderFileView()
+        {
+            Render("View");
+        }
+
+        public object ResourceView(string message)
         {
             var model = new ViewModel
             {
                 Message = message
             };
-            Render("ResourceView", model);
+            return View("ResourceView", model);
         }
     }
 }

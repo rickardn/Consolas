@@ -76,6 +76,14 @@ namespace Consolas.Core
                 }
                 propertyInfo.SetValue(instance, value, null);
             }
+            else if (propertyInfo.PropertyType == typeof (int))
+            {
+                int value;
+                if (int.TryParse(argument.Value.Value, out value))
+                {
+                    propertyInfo.SetValue(instance, value, null);
+                }
+            }
             else
             {
                 propertyInfo.SetValue(instance, argument.Value.Value, null);
