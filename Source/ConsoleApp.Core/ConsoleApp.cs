@@ -69,8 +69,10 @@ namespace Consolas.Core
 
             app.ViewEngines = new ViewEngineCollection(_container);
             
-            // TODO: Remove ViewEngines from command
-            _container.RegisterInitializer<Command>(command => { command.ViewEngines = app.ViewEngines; });
+            _container.RegisterInitializer<Command>(command =>
+            {
+                command.ViewEngines = app.ViewEngines;
+            });
 
             CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
             app.Configure(_container);
