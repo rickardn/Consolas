@@ -1,10 +1,11 @@
-Consolas is a console application framework that simplyfies the creation of averything from simple throw away apps to bigger, more complex tools with lots of arguments.
+Consolas is a console application framework that simplyfies the creation of everything from simple throw away apps to bigger, more complex tools with lots of arguments.
 
 #Features
 - Convention over configuration
 - Small fingerprint
 - Testable
-- Razor view engine
+- Mustache view engine
+- Razor view engine (optional)
 
 #How to get it
 
