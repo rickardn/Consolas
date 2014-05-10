@@ -66,10 +66,6 @@
       <Project>{e19f555a-6e76-4b70-8184-e3ee2f4d65f8}</Project>
       <Name>Samples.Ping</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ConsoleApp.Core.Tests\Consolas.Core.Tests.csproj">
-      <Project>{D423725D-FCE3-4932-90AA-99ED4F007772}</Project>
-      <Name>Consolas.Core.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
