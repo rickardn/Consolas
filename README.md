@@ -70,7 +70,7 @@ public class GrepCommandTests
 }
 ```
 
-###End to to end tests
+###End to end tests
 The following is a [sample](https://github.com/rickardn/Consolas/blob/master/Source/UnitTests/Samples/Samples.Grep.Tests/EndToEndTests.cs) testing a console application from end to end:
 
 ```csharp
