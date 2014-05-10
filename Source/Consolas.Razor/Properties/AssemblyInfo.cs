@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Consolas.Razor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("getconsolas.org")]
 [assembly: AssemblyProduct("Consolas.Razor")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,12 +24,11 @@ using System.Runtime.InteropServices;
 
 // Version information for an assembly consists of the following four values:
 //
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
+//  http://semver.org/
+//  Given a version number MAJOR.MINOR.PATCH, increment the:
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+//  1. MAJOR version when you make incompatible API changes,
+//  2. MINOR version when you add functionality in a backwards-compatible manner, and
+//  3. PATCH version when you make backwards-compatible bug fixes.
+//
 [assembly: AssemblyVersion("0.6.0")]
