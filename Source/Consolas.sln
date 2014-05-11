@@ -39,6 +39,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{9A46A4C5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{68FA68A2-CDD9-479A-BD4A-6A1E5449263D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas", "Consolas", "{3C22E34F-DC5E-406E-B97F-0CAE06329351}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Consolas\Consolas.nuspec = ..\NuGet\Consolas\Consolas.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{59DDE60B-EED5-405F-8995-A5A77D3E7725}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{58D3229F-62A3-45B4-87C9-67910A298B97}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Consolas\content\Commands\HelpCommand.cs.pp = ..\NuGet\Consolas\content\Commands\HelpCommand.cs.pp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Args", "Args", "{262B4656-853D-403E-AA71-DA9802A7ABFE}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Consolas\content\Args\HelpArgs.cs.pp = ..\NuGet\Consolas\content\Args\HelpArgs.cs.pp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas.Razor", "Consolas.Razor", "{7FEF00C0-06AD-4F97-A55C-843D1B34F87E}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Consolas.Razor\Consolas.Razor.nuspec = ..\NuGet\Consolas.Razor\Consolas.Razor.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,5 +112,10 @@ Global
 		{146B2CC9-8DE4-4C0A-A8F2-A9779A9F699F} = {4E8F5190-B58B-4049-8A60-71E48646654E}
 		{E19F555A-6E76-4B70-8184-E3EE2F4D65F8} = {82DA1018-838C-4087-A12B-124BB89CA500}
 		{7AF6841A-1C4C-427E-9E7B-01954EEF82DC} = {82DA1018-838C-4087-A12B-124BB89CA500}
+		{3C22E34F-DC5E-406E-B97F-0CAE06329351} = {9A46A4C5-BF86-4DF7-81E3-F7BD712F8557}
+		{7FEF00C0-06AD-4F97-A55C-843D1B34F87E} = {9A46A4C5-BF86-4DF7-81E3-F7BD712F8557}
+		{59DDE60B-EED5-405F-8995-A5A77D3E7725} = {3C22E34F-DC5E-406E-B97F-0CAE06329351}
+		{58D3229F-62A3-45B4-87C9-67910A298B97} = {59DDE60B-EED5-405F-8995-A5A77D3E7725}
+		{262B4656-853D-403E-AA71-DA9802A7ABFE} = {59DDE60B-EED5-405F-8995-A5A77D3E7725}
 	EndGlobalSection
 EndGlobal
