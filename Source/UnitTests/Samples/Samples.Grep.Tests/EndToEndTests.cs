@@ -30,6 +30,13 @@ namespace Samples.Grep.Tests
         }
 
         [Test]
+        public void NoArgs_PrintHelpMessage()
+        {
+            Program.Main(new string[0]);
+            StringAssert.Contains("Usage", _consoleOut.ToString());
+        }
+
+        [Test]
         public void Grep()
         {
             Program.Main(new[] {"foo", "doc.txt"});

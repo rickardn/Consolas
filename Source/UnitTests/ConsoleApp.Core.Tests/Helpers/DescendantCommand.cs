@@ -21,6 +21,11 @@
             Render("View");
         }
 
+        public void RenderNonExistantView()
+        {
+            Render("Missing");
+        }
+
         public object ResourceView(string message)
         {
             var model = new ViewModel

@@ -12,7 +12,7 @@ namespace Samples.Grep.Tests
         {
             var command = new GrepCommand();
 
-            var result = command.Execute(new GrepArgs
+            var result = (string) command.Execute(new GrepArgs
             {
                 FileName = "doc.txt",
                 Regex = "foo"

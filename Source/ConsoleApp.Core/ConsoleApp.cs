@@ -67,7 +67,7 @@ namespace Consolas.Core
             _container = new Container();
             _container.Options.AllowOverridingRegistrations = true;
 
-            app.ViewEngines = new ViewEngineCollection(_container);
+            app.ViewEngines = app.ViewEngines ?? new ViewEngineCollection(_container);
             
             _container.RegisterInitializer<Command>(command =>
             {
@@ -150,26 +150,25 @@ namespace Consolas.Core
         private void ExecuteCommand(Type commandType, CommandSet command)
         {
             var methodInfo = commandType.GetMethod(ExecuteMethod);
+            object result;
+
             try
             {
-                var result = methodInfo.Invoke(command.Command, new[] {command.Args});
-                
-                var commandResult = result as CommandResult;
-                if (commandResult != null)
-                {
-                    var view = ViewEngines.FindView((Command) command.Command, commandResult.ViewName);
-                    if (view != null)
-                    {
-                        result = view.Render(commandResult.Model);
-                    }
-                }
-
-                Console.WriteLine(result);
+                result = methodInfo.Invoke(command.Command, new[] {command.Args});
             }
             catch (Exception e)
             {
                 throw e.InnerException;
             }
+
+            var commandResult = result as CommandResult;
+            if (commandResult != null)
+            {
+                var view = ViewEngines.FindView((Command) command.Command, commandResult.ViewName);
+                result = view.Render(commandResult.Model);
+            }
+
+            Console.WriteLine(result);
         }
 
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)

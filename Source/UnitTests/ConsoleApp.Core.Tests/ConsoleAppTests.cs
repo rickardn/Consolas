@@ -1,11 +1,14 @@
 ﻿using System;
 using Consolas.Core.Tests.Helpers;
+using Consolas.Mustache;
 using NUnit.Framework;
+using Should;
+using SimpleInjector;
 
 namespace Consolas.Core.Tests
 {
     [TestFixture]
-    public class ConsoleAppBaseTests : ConsoleTest
+    public class ConsoleAppTests : ConsoleTest
     {
         [Test]
         public void Match_EndToEndTest()
@@ -46,15 +49,42 @@ namespace Consolas.Core.Tests
         public void Match_ArgumentWithoutCommand_ThrowsException()
         {
             var sut = new SimpleConsoleApp();
-            Assert.Throws<NotImplementedException>(() =>
-                sut.Main(new[] {"-ArgWithoutCommand", "foo"}));
+
+            Action match = () => sut.Main(new[] {"-ArgWithoutCommand", "foo"});
+
+            match.ShouldThrow<NotImplementedException>();
         }
 
         [Test]
         public void Match_CommandWhichThrowsException_SameExceptionIsRethrown()
         {
             var sut = new SimpleConsoleApp();
-            Assert.Throws<Exception>(() => sut.Main(new[] {"-Throw"}));
+
+            Action match = () => sut.Main(new[] {"-Throw"});
+
+            match.ShouldThrow<Exception>();
+        }
+
+        [Test]
+        public void Match_NoViewEngines_ThrowsException()
+        {
+            var sut = new SimpleConsoleApp();
+            
+            Action match = () => sut.Main(new []{"-ShowView"});
+
+            match.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view engines", ex.Message));
+        }
+
+        [Test]
+        public void Match_NoViewFound_ThrowsException()
+        {
+            var sut = new SimpleConsoleAppWithViewEngine();
+
+            Action match = () => sut.Main(new[] {"-ShowView"});
+
+            match.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view found", ex.Message));
         }
     }
 }

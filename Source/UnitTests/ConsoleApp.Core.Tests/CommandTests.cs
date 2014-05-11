@@ -1,4 +1,6 @@
-﻿using Consolas.Core.Tests.Helpers;
+﻿using System;
+using Consolas.Core.Tests.Helpers;
+using Consolas.Mustache;
 using NUnit.Framework;
 using Should;
 using SimpleInjector;
@@ -49,18 +51,34 @@ namespace Consolas.Core.Tests
         }
 
         [Test]
-        public void Render_NoViewFound_ThrowsException()
+        public void Render_NoViewEngines_ThrowsException()
         {
-            Assert.Throws<ViewEngineException>(() 
-                => _command.RenderFileView());
+            Action renderFileView = () => _command.RenderFileView();
+
+            renderFileView.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view engines", ex.Message));
         }
 
         [Test]
         public void Render_ViewEnginesIsNull_ThrowsException()
         {
             _command.ViewEngines = null;
-            Assert.Throws<ViewEngineException>(() 
-                => _command.RenderFileView());
+
+            Action renderFileView = () => _command.RenderFileView();
+
+            renderFileView.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view engines", ex.Message));
+        }
+
+        [Test]
+        public void Render_NoViewFound_ThrowsException()
+        {
+            _command.ViewEngines.Add<MustacheViewEngine>();
+
+            Action renderFileView = () => _command.RenderNonExistantView();
+
+            renderFileView.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view found", ex.Message));
         }
     }
 }

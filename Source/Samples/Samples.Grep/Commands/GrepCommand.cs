@@ -1,14 +1,18 @@
 ﻿using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using Consolas.Core;
 using Samples.Grep.Args;
 
 namespace Samples.Grep.Commands
 {
-    public class GrepCommand
+    public class GrepCommand : Command
     {
-        public string Execute(GrepArgs args)
+        public object Execute(GrepArgs args)
         {
+            if (string.IsNullOrEmpty(args.Regex))
+                return View("Usage");
+
             var buffer = new StringBuilder();
             foreach (var line in File.ReadAllLines(args.FileName))
             {
