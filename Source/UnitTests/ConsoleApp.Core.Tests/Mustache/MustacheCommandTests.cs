@@ -1,7 +1,6 @@
 ﻿using Consolas.Core.Tests.Helpers;
 using Consolas.Mustache;
 using NUnit.Framework;
-using Should;
 using SimpleInjector;
 
 namespace Consolas.Core.Tests.Mustache
