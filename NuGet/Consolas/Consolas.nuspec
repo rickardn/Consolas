@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Consolas</id>
+        <version>0.6.0</version>
+        <title>Consolas - a console application framework for .NET</title>
+        <authors>Consolas</authors>
+        <owners>rickardnilsson.net</owners>
+        <licenseUrl>https://github.com/rickardn/Consolas/blob/master/LICENCE.md</licenseUrl>
+        <projectUrl>https://github.com/rickardn/Consolas</projectUrl>
+        <iconUrl>http://www.rickardnilsson.net/image.axd?picture=consolas-icon_1.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Consolas is a console application framework providing a convention based approach to quickly building console apps. The framework is suited both for small throw away apps to large multi sub command apps with lots of arguments.</description>
+        <releaseNotes />
+        <copyright>Copyright 2014 Consolas</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.0">
+                <dependency id="SimpleInjector" version="2.5.0" />
+                <dependency id="Nustache" version="1.13.8.22" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="content\Args\HelpArgs.cs.pp" target="content\Args\HelpArgs.cs.pp" />
+        <file src="content\Commands\HelpCommand.cs.pp" target="content\Commands\HelpCommand.cs.pp" />
+        <file src="..\..\lib\Consolas\Consolas.Core.dll" target="lib\net40\Consolas.Core.dll" />
+        <file src="..\..\lib\Consolas\Consolas.Core.xml" target="lib\net40\Consolas.Core.xml" />
+    </files>
+</package>

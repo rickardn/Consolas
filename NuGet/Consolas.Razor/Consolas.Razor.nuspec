@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Consolas.Razor</id>
+        <version>0.6.0</version>
+        <title>Consolas Razor View Engine</title>
+        <authors>Consolas</authors>
+        <owners>rickardnilsson.net</owners>
+        <licenseUrl>https://github.com/rickardn/Consolas/blob/master/LICENCE.md</licenseUrl>
+        <projectUrl>https://github.com/rickardn/Consolas</projectUrl>
+        <iconUrl>http://www.rickardnilsson.net/image.axd?picture=consolas-icon_1.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Use Razor templates to create your Consolas views.</description>
+        <releaseNotes>Requires .NET Framework 4.5</releaseNotes>
+        <copyright>Copyright 2014 Consolas</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="RazorEngine" version="3.4.1" />
+                <dependency id="Consolas" version="0.6.0" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\..\lib\Consolas.Razor\Consolas.Razor.dll" target="lib\net45\Consolas.Razor.dll" />
+        <file src="..\..\lib\Consolas.Razor\Consolas.Razor.xml" target="lib\net45\Consolas.Razor.xml" />
+    </files>
+</package>
