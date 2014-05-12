@@ -69,8 +69,10 @@
     <Compile Include="Helpers\AssertExtensions.cs" />
     <Compile Include="CommandTests.cs" />
     <Compile Include="ContainerTests.cs" />
-    <Compile Include="Helpers\CommandWithView.cs" />
-    <Compile Include="Helpers\CommandWithViewArgs.cs" />
+    <Compile Include="Helpers\CommandWithRenderView.cs" />
+    <Compile Include="Helpers\CommandWithRenderViewArgs.cs" />
+    <Compile Include="Helpers\CommandWithShowView.cs" />
+    <Compile Include="Helpers\CommandWithShowViewArgs.cs" />
     <Compile Include="Helpers\SimpleConsoleAppWithViewEngine.cs" />
     <Compile Include="ITestService.cs" />
     <Compile Include="LexerTests.cs" />

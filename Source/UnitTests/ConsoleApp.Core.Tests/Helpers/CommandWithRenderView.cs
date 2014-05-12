@@ -1,8 +1,8 @@
 ﻿namespace Consolas.Core.Tests.Helpers
 {
-    public class CommandWithView : Command
+    public class CommandWithRenderView : Command
     {
-        public void Execute(CommandWithViewArgs args)
+        public void Execute(CommandWithRenderViewArgs args)
         {
             Render("NonExistantView");
         }

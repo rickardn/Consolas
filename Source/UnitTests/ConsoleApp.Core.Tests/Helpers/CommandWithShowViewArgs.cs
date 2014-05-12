@@ -1,6 +1,6 @@
 ﻿namespace Consolas.Core.Tests.Helpers
 {
-    public class CommandWithViewArgs
+    public class CommandWithShowViewArgs
     {
         public bool ShowView { get; set; } 
     }

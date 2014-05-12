@@ -66,24 +66,46 @@ namespace Consolas.Core.Tests
         }
 
         [Test]
-        public void Match_NoViewEngines_ThrowsException()
+        public void Match_RenderNoViewEngines_ThrowsException()
         {
             var sut = new SimpleConsoleApp();
             
-            Action match = () => sut.Main(new []{"-ShowView"});
+            Action match = () => sut.Main(new []{"-RenderView"});
 
             match.ShouldThrow<ViewEngineException>(ex 
                 => StringAssert.Contains("No view engines", ex.Message));
         }
 
         [Test]
-        public void Match_NoViewFound_ThrowsException()
+        public void Match_RenderNoViewFound_ThrowsException()
         {
             var sut = new SimpleConsoleAppWithViewEngine();
 
-            Action match = () => sut.Main(new[] {"-ShowView"});
+            Action match = () => sut.Main(new[] {"-RenderView"});
 
             match.ShouldThrow<ViewEngineException>(ex 
+                => StringAssert.Contains("No view found", ex.Message));
+        }
+
+        [Test]
+        public void Match_ViewNoViewEngines_ThrowsException()
+        {
+            var sut = new SimpleConsoleApp();
+
+            Action match = () => sut.Main(new[] { "-ShowView" });
+
+            match.ShouldThrow<ViewEngineException>(ex
+                => StringAssert.Contains("No view engines", ex.Message));
+        }
+
+        [Test]
+        public void Match_ViewNoViewFound_ThrowsException()
+        {
+            var sut = new SimpleConsoleAppWithViewEngine();
+
+            Action match = () => sut.Main(new[] { "-ShowView" });
+
+            match.ShouldThrow<ViewEngineException>(ex
                 => StringAssert.Contains("No view found", ex.Message));
         }
     }
