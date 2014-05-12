@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using SimpleInjector;
 
 namespace Consolas.Core
@@ -21,12 +20,6 @@ namespace Consolas.Core
         {
             var viewEngine = _container.GetInstance<T>();
             Add(viewEngine);
-        }
-
-        public IView FindView(Command command, string viewName)
-        {
-            return this.Select(viewEngine => viewEngine.FindView(command, viewName))
-                .FirstOrDefault(view => view != null);
         }
     }
 }

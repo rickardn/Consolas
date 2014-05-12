@@ -85,6 +85,7 @@
     <Compile Include="SystemConsole.cs" />
     <Compile Include="Tokens.cs" />
     <Compile Include="ViewEngineCollection.cs" />
+    <Compile Include="ViewEngineCollectionExtensions.cs" />
     <Compile Include="ViewEngineException.cs" />
   </ItemGroup>
   <ItemGroup>
