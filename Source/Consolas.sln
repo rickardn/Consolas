@@ -36,8 +36,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{269A16
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{9A46A4C5-BF86-4DF7-81E3-F7BD712F8557}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\NuGetPack.bat = ..\NuGet\NuGetPack.bat
+		..\NuGet\NuGetPush.bat = ..\NuGet\NuGetPush.bat
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{68FA68A2-CDD9-479A-BD4A-6A1E5449263D}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\build.msbuild = ..\build\build.msbuild
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas", "Consolas", "{3C22E34F-DC5E-406E-B97F-0CAE06329351}"
 	ProjectSection(SolutionItems) = preProject
