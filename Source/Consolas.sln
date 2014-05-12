@@ -44,6 +44,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{68FA68A2-CDD9-479A-BD4A-6A1E5449263D}"
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.msbuild = ..\build\build.msbuild
+		..\build\copy.bat = ..\build\copy.bat
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas", "Consolas", "{3C22E34F-DC5E-406E-B97F-0CAE06329351}"
