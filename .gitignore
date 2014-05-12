@@ -31,3 +31,6 @@ _NCrunch*
 *.ncrunch*
 *.lvu
 *.ixd
+Nuget/*.nupkg
+NuGet/**/**/**/*.dll
+NuGet/**/**/**/*.xml
