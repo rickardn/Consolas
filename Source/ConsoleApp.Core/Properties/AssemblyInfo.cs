@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //  2. MINOR version when you add functionality in a backwards-compatible manner, and
 //  3. PATCH version when you make backwards-compatible bug fixes.
 //
-[assembly: AssemblyVersion("0.6.1")]
+[assembly: AssemblyVersion("0.6.2")]

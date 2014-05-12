@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Consolas</id>
-        <version>0.6.1</version>
+        <version>0.6.2</version>
         <title>Consolas - a console application framework for .NET</title>
         <authors>Consolas</authors>
         <owners>rickardnilsson.net</owners>
