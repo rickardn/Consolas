@@ -70,6 +70,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas.Razor", "Consolas.
 		..\NuGet\Consolas.Razor\Consolas.Razor.nuspec = ..\NuGet\Consolas.Razor\Consolas.Razor.nuspec
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{55F3CA38-D56B-4132-9C22-EF2A65960DCB}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Consolas\content\Views\Default.template.pp = ..\NuGet\Consolas\content\Views\Default.template.pp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,5 +131,6 @@ Global
 		{59DDE60B-EED5-405F-8995-A5A77D3E7725} = {3C22E34F-DC5E-406E-B97F-0CAE06329351}
 		{58D3229F-62A3-45B4-87C9-67910A298B97} = {59DDE60B-EED5-405F-8995-A5A77D3E7725}
 		{262B4656-853D-403E-AA71-DA9802A7ABFE} = {59DDE60B-EED5-405F-8995-A5A77D3E7725}
+		{55F3CA38-D56B-4132-9C22-EF2A65960DCB} = {59DDE60B-EED5-405F-8995-A5A77D3E7725}
 	EndGlobalSection
 EndGlobal

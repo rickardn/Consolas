@@ -23,6 +23,7 @@
     <files>
         <file src="content\Args\HelpArgs.cs.pp" target="content\Args\HelpArgs.cs.pp" />
         <file src="content\Commands\HelpCommand.cs.pp" target="content\Commands\HelpCommand.cs.pp" />
+        <file src="content\Views\Default.template.pp" target="content\Views\Default.template.pp" />
         <file src="lib\net40\Consolas.Core.dll" target="lib\net40\Consolas.Core.dll" />
         <file src="lib\net40\Consolas.Core.xml" target="lib\net40\Consolas.Core.xml" />
     </files>
