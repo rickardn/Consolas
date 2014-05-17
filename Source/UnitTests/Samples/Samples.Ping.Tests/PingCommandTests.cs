@@ -14,6 +14,8 @@ namespace Samples.Ping.Tests
         {
             var thread = Substitute.For<IThreadService>();
             var command = new PingCommand(thread);
+
+            // TODO: Implement PingCommand Test
             //command.Execute(new PingArgs
             //{
             //    Host = "google.com"
