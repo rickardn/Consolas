@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Samples.Ping.Tests
 {
     [TestFixture]
-    public class SystemTest
+    public class PingSystemTest
     {
         private StringBuilder _consoleOut;
         private TextWriter _outWriter;
@@ -23,6 +23,13 @@ namespace Samples.Ping.Tests
         public void TearDown()
         {
             Console.SetOut(_outWriter);
+        }
+
+        [Test]
+        public void Main_NoArgs_PrintsMessage()
+        {
+            Program.Main(new string[0]);
+            StringAssert.Contains("Usage: ping", _consoleOut.ToString());
         }
 
         [Test]
