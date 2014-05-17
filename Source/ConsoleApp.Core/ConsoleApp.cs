@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Consolas.Mustache;
 using SimpleInjector;
 
 namespace Consolas.Core
@@ -74,7 +75,11 @@ namespace Consolas.Core
                 command.ViewEngines = app.ViewEngines;
             });
 
+
             CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
+            
+            app.ViewEngines.Add(new MustacheViewEngine());
+            
             app.Configure(_container);
             _container.Verify();
         }
