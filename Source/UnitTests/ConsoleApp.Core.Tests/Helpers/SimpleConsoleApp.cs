@@ -11,6 +11,7 @@ namespace Consolas.Core.Tests.Helpers
 
         public override void Configure(Container container)
         {
+            base.Configure(container);
             ViewEngines.Clear();
         }
     }
