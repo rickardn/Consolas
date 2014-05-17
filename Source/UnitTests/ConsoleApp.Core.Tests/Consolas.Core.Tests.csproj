@@ -66,6 +66,7 @@
     <Compile Include="AcitvatorCommandFactoryTests.cs" />
     <Compile Include="ArgumentMatcherDefaultArgumentsTests.cs" />
     <Compile Include="ArgumentMatcherTests.cs" />
+    <Compile Include="CommandContextTests.cs" />
     <Compile Include="Helpers\ArgThrowsException.cs" />
     <Compile Include="Helpers\AssertExtensions.cs" />
     <Compile Include="CommandTests.cs" />

@@ -66,6 +66,7 @@
     <Compile Include="ArgumentSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandBuilder.cs" />
+    <Compile Include="CommandContext.cs" />
     <Compile Include="CommandResult.cs" />
     <Compile Include="Consolas.Mustache\MustacheView.cs" />
     <Compile Include="Consolas.Mustache\MustacheViewEngine.cs" />
