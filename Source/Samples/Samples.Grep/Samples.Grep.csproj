@@ -66,7 +66,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Views\Version.template" />
-    <EmbeddedResource Include="Views\Usage.template" />
+    <EmbeddedResource Include="Views\Default.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsoleApp.Core\Consolas.Core.csproj">

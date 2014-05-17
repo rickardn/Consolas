@@ -69,6 +69,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Views\Default.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Consolas.Razor\Consolas.Razor.csproj">
