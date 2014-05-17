@@ -66,6 +66,7 @@
     <Compile Include="AcitvatorCommandFactoryTests.cs" />
     <Compile Include="ArgumentMatcherDefaultArgumentsTests.cs" />
     <Compile Include="ArgumentMatcherTests.cs" />
+    <Compile Include="Helpers\ArgThrowsException.cs" />
     <Compile Include="Helpers\AssertExtensions.cs" />
     <Compile Include="CommandTests.cs" />
     <Compile Include="ContainerTests.cs" />
@@ -74,7 +75,10 @@
     <Compile Include="Helpers\CommandWithShowView.cs" />
     <Compile Include="Helpers\CommandWithShowViewArgs.cs" />
     <Compile Include="Helpers\SimpleConsoleAppWithViewEngine.cs" />
-    <Compile Include="ITestService.cs" />
+    <Compile Include="Helpers\ITestService.cs" />
+    <Compile Include="Helpers\TestContainer.cs" />
+    <Compile Include="Helpers\TestContainerDerivative.cs" />
+    <Compile Include="Helpers\TestService.cs" />
     <Compile Include="LexerTests.cs" />
     <Compile Include="ArgumentLL2ParserTests.cs" />
     <Compile Include="ArgumentParserTests.cs" />

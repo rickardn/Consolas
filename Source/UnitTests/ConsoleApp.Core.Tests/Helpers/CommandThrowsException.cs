@@ -9,9 +9,4 @@ namespace Consolas.Core.Tests.Helpers
             throw new Exception("failure");
         }
     }
-
-    public class ArgThrowsException
-    {
-        public bool Throw { get; set; }
-    }
 }
