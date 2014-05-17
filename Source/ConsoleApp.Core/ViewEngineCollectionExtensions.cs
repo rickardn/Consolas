@@ -4,7 +4,7 @@ namespace Consolas.Core
 {
     public static class ViewEngineCollectionExtensions
     {
-        public static IView FindView(this ViewEngineCollection viewEngines, Command command, string viewName)
+        public static IView FindView(this ViewEngineCollection viewEngines, CommandContext commandContext, string viewName)
         {
             if (viewEngines == null || viewEngines.Count == 0)
             {
@@ -13,9 +13,9 @@ namespace Consolas.Core
                 throw new ViewEngineException(message);
             }
 
-            IView result = 
+            IView result =
                 (from viewEngine in viewEngines
-                 select viewEngine.FindView(command, viewName))
+                 select viewEngine.FindView(commandContext, viewName))
                 .FirstOrDefault(view => view != null);
 
             if (result == null)

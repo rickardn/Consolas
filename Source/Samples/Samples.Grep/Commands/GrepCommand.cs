@@ -11,7 +11,7 @@ namespace Samples.Grep.Commands
         public object Execute(GrepArgs args)
         {
             if (string.IsNullOrEmpty(args.Regex))
-                return View("Usage");
+                return View("Default");
 
             var buffer = new StringBuilder();
             foreach (var line in File.ReadAllLines(args.FileName))

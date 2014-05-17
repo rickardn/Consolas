@@ -7,10 +7,9 @@ namespace Consolas.Core
     {
         public string[] FileExtensions { get; set; }
 
-        public IView FindView(Command command, string viewName)
+        public IView FindView(CommandContext commandContext, string viewName)
         {
-            var assembly = command.GetType().Assembly;
-            var text = GetView(viewName, assembly);
+            var text = GetView(viewName, commandContext.Assembly);
             return text != null ? CreateView(text) : null;
         }
 

@@ -2,6 +2,6 @@
 {
     public interface IViewEngine
     {
-        IView FindView(Command command, string viewName);
+        IView FindView(CommandContext commandContext, string viewName);
     }
 }

@@ -45,22 +45,35 @@ namespace Consolas.Core
 
             if (commandType != null)
             {
-                CommandSet command = app.FindCommand(args, commandType);
-                app.ExecuteCommand(commandType.Command, command);
+                CommandSet commandSet = app.CreateCommandWithArgs(args, commandType);
+                app.ExecuteCommand(commandType.Command, commandSet);
             }
-            else
+            else if (!TryRenderDefaultView(callingAssembly, app))
             {
-                // TODO
                 Console.WriteLine("Using: {0}.exe ...", callingAssembly.GetName().Name.ToLower());
             }
         }
 
+        private static bool TryRenderDefaultView(Assembly callingAssembly, ConsoleApp app)
+        {
+            try
+            {
+                var context = new CommandContext(callingAssembly);
+                var view = app.ViewEngines.FindView(context, DefaultViewName);
+                var result = view.Render<object>(null);
+                Console.WriteLine(result);
+                return true;
+            }
+            catch (ViewEngineException)
+            {
+            }
+            return false;
+        }
+
         private const string InitMethodName = "Match";
-
         private const string ExecuteMethod = "Execute";
-
+        private const string DefaultViewName = "Default";
         private ArgumentMatcher _argumentMatcher;
-
         private static Container _container;
 
         private static void Configure(ConsoleApp app)
@@ -140,7 +153,7 @@ namespace Consolas.Core
             return null;
         }
 
-        private CommandSet FindCommand(string[] args, CommandType commandType)
+        private CommandSet CreateCommandWithArgs(string[] args, CommandType commandType)
         {
             object command = CommandBuilder.Current.GetCommandInstance(commandType.Command);
             object arg = _argumentMatcher.MatchToObject(args, commandType.Args);
@@ -154,24 +167,10 @@ namespace Consolas.Core
 
         private void ExecuteCommand(Type commandType, CommandSet command)
         {
-            var methodInfo = commandType.GetMethod(ExecuteMethod);
-            object result;
+            MethodInfo executeMethodInfo = commandType.GetMethod(ExecuteMethod);
 
-            try
-            {
-                result = methodInfo.Invoke(command.Command, new[] {command.Args});
-            }
-            catch (Exception e)
-            {
-                throw e.InnerException;
-            }
-
-            var commandResult = result as CommandResult;
-            if (commandResult != null)
-            {
-                var view = ViewEngines.FindView((Command) command.Command, commandResult.ViewName);
-                result = view.Render(commandResult.Model);
-            }
+            var result = TryInvokeCommand(command, executeMethodInfo);
+            result = HandleCommandResult(command, result);
 
             Console.WriteLine(result);
         }
@@ -181,6 +180,32 @@ namespace Consolas.Core
             return
                 argTypes.FirstOrDefault(
                     x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
+        }
+
+        private static object TryInvokeCommand(CommandSet command, MethodInfo methodInfo)
+        {
+            object result;
+            try
+            {
+                result = methodInfo.Invoke(command.Command, new[] {command.Args});
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
+            return result;
+        }
+
+        private object HandleCommandResult(CommandSet commandSet, object result)
+        {
+            var commandResult = result as CommandResult;
+            if (commandResult != null)
+            {
+                var command = (Command) commandSet.Command;
+                var view = ViewEngines.FindView(command.Context, commandResult.ViewName);
+                result = view.Render(commandResult.Model);
+            }
+            return result;
         }
 
         private class CommandType

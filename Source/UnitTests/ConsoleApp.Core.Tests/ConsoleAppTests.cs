@@ -42,7 +42,7 @@ namespace Consolas.Core.Tests
         {
             var sut = new SimpleConsoleApp();
             sut.Main(new[] {"-NoMatchingArg"});
-            StringAssert.Contains("Using", ConsoleOut.ToString());
+            StringAssert.Contains("Using: consolas", ConsoleOut.ToString());
         }
 
         [Test]
