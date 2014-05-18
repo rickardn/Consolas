@@ -44,6 +44,13 @@ namespace Samples.Grep.Tests
         }
 
         [Test]
+        public void Grep_FileInCurrentPath()
+        {
+            Program.Main(new[] { "foo", @".\doc.txt" });
+            StringAssert.Contains("foo bar baz", _consoleOut.ToString());
+        }
+
+        [Test]
         public void Version()
         {
             Program.Main(new []{ "-version"});
