@@ -6,7 +6,7 @@ using SimpleInjector;
 namespace Consolas.Core.Tests.Mustache
 {
     [TestFixture]
-    public class MustacheCommandTests : ConsoleTest
+    public class MustacheCommandTests : ConsoleTestBase
     {
         private DescendantCommand _command;
 

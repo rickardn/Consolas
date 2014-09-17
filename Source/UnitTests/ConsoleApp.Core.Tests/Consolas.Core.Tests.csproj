@@ -84,7 +84,7 @@
     <Compile Include="ArgumentLL2ParserTests.cs" />
     <Compile Include="ArgumentParserTests.cs" />
     <Compile Include="ConsoleAppTests.cs" />
-    <Compile Include="ConsoleTest.cs" />
+    <Compile Include="ConsoleTestBase.cs" />
     <Compile Include="Helpers\ArgumentWithoutCommand.cs" />
     <Compile Include="Helpers\BooleanParameter.cs" />
     <Compile Include="Helpers\CommandThrowsException.cs" />

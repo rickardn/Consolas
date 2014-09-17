@@ -8,7 +8,7 @@ using SimpleInjector;
 namespace Consolas.Core.Tests
 {
     [TestFixture]
-    public class ConsoleAppTests : ConsoleTest
+    public class ConsoleAppTests : ConsoleTestBase
     {
         [Test]
         public void Match_EndToEndTest()

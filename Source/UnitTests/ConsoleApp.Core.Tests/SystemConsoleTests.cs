@@ -3,7 +3,7 @@
 namespace Consolas.Core.Tests
 {
     [TestFixture]
-    public class SystemConsoleTests : ConsoleTest
+    public class SystemConsoleTests : ConsoleTestBase
     {
         private SystemConsole _console;
 
