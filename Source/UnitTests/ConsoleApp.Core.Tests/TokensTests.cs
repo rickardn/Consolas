@@ -103,6 +103,7 @@ namespace Consolas.Core.Tests
         [TestCase("!")]
         [TestCase("!f")]
         [TestCase(".\\abc.txt")]
+        [TestCase("text/xml")]
         public void Value_ShouldMatch(string input)
         {
             Tokens.Value.IsMatch(input).ShouldBeTrue();
