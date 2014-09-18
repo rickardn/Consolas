@@ -1,9 +1,7 @@
 ﻿using System;
 using Consolas.Core.Tests.Helpers;
-using Consolas.Mustache;
 using NUnit.Framework;
 using Should;
-using SimpleInjector;
 
 namespace Consolas.Core.Tests
 {
@@ -108,5 +106,26 @@ namespace Consolas.Core.Tests
             match.ShouldThrow<ViewEngineException>(ex
                 => StringAssert.Contains("No view found", ex.Message));
         }
+
+        [Test]
+        public void Match_MultipleExecutes_EndToEndTest1()
+        {
+            var sut = new SimpleConsoleApp();
+
+            sut.Main(new[] {"-MultipleExecute1"});
+
+            StringAssert.Contains("Execute 1", ConsoleOut.ToString());
+        }
+
+        [Test]
+        public void Match_MultipleExecutes_EndToEndTest2()
+        {
+            var sut = new SimpleConsoleApp();
+
+            sut.Main(new[] { "-MultipleExecute2" });
+
+            StringAssert.Contains("Execute 2", ConsoleOut.ToString());
+        }
+
     }
 }

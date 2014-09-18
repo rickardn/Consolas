@@ -75,6 +75,7 @@
     <Compile Include="Helpers\CommandWithRenderViewArgs.cs" />
     <Compile Include="Helpers\CommandWithShowView.cs" />
     <Compile Include="Helpers\CommandWithShowViewArgs.cs" />
+    <Compile Include="Helpers\MultipleExecutesCommand.cs" />
     <Compile Include="Helpers\SimpleConsoleAppWithViewEngine.cs" />
     <Compile Include="Helpers\ITestService.cs" />
     <Compile Include="Helpers\TestContainer.cs" />

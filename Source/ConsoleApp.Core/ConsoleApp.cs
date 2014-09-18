@@ -167,12 +167,35 @@ namespace Consolas.Core
 
         private void ExecuteCommand(Type commandType, CommandSet command)
         {
-            MethodInfo executeMethodInfo = commandType.GetMethod(ExecuteMethod);
-
-            var result = TryInvokeCommand(command, executeMethodInfo);
+            var executeMethod = FindExecuteMethod(commandType, command);
+            var result = TryInvokeCommand(command, executeMethod);
             result = HandleCommandResult(command, result);
 
             Console.WriteLine(result);
+        }
+
+        private static MethodInfo FindExecuteMethod(Type commandType, CommandSet command)
+        {
+            MethodInfo executeMethodInfo = null;
+
+            IEnumerable<MethodInfo> methods =
+                from method in commandType.GetMethods()
+                where method.Name == ExecuteMethod
+                select method;
+
+            foreach (MethodInfo method in methods)
+            {
+                ParameterInfo[] parameters = method.GetParameters();
+                foreach (var parameter in parameters)
+                {
+                    if (parameter.ParameterType == command.Args.GetType())
+                    {
+                        executeMethodInfo = method;
+                        break;
+                    }
+                }
+            }
+            return executeMethodInfo;
         }
 
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
