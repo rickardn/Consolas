@@ -5,7 +5,7 @@ Consolas is a console application framework that simplyfies the creation of ever
 - Small fingerprint
 - Testable
 - Mustache view engine
-- Razor view engine (optional)
+- Razor view engine (plugable)
 
 ##How to get it
 
