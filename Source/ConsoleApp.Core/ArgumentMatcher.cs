@@ -100,12 +100,19 @@ namespace Consolas.Core
         {
             bool useDefault = arguments.Any(a => a.Value.IsDefault);
 
+            var matchingTypes = new List<TypeMatch>();
+
             foreach (var type in Types)
             {
-                var customAttributes = type.GetCustomAttributes(typeof (DefaultArgumentsAttribute), false);
-                var isDefaultArgs = customAttributes.Length > 0;
+                object[] customAttributes = type.GetCustomAttributes(typeof (DefaultArgumentsAttribute), false);
+                bool isDefaultArgs = customAttributes.Length > 0;
 
                 bool isMatch = isDefaultArgs && arguments.Count == 0;
+
+                var matchingType = new TypeMatch
+                {
+                    Type = type
+                };
 
                 foreach (var argument in arguments)
                 {
@@ -114,21 +121,41 @@ namespace Consolas.Core
                         isMatch = true;
                         argument.Value.IsDefault = true;
                         argument.Value.Value = argument.Key;
+                        matchingType.ArgumentMatches++;
                     }
                     else
                     {
                         if (GetPropertyInfo(type, argument.Key) != null)
                         {
                             isMatch = true;
+                            matchingType.ArgumentMatches++;
                         }
                     }
                 }
 
                 if (isMatch)
                 {
-                    return type;
+                    matchingTypes.Add(matchingType);
                 }
             }
+
+            if (matchingTypes.Count == 1)
+                return matchingTypes[0].Type;
+
+            var matchingTypesInOrder = matchingTypes.OrderByDescending(x => x.ArgumentMatches).ToList();
+            if (matchingTypes.Count > 1)
+            {
+                if (matchingTypesInOrder[0].ArgumentMatches == matchingTypesInOrder[1].ArgumentMatches)
+                {
+                    throw new Exception(string.Format("The arguments [{0}] and [{1}] are non deterministic", 
+                        matchingTypesInOrder[0].Type.Name,
+                        matchingTypesInOrder[1].Type.Name));
+                }
+            }
+
+            TypeMatch matching = matchingTypesInOrder.FirstOrDefault();
+            if (matching != null)
+                return matching.Type;
 
             return null;
         }
@@ -137,6 +164,12 @@ namespace Consolas.Core
         {
             return type.GetProperty(argumentName,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+        }
+
+        private class TypeMatch
+        {
+            public Type Type { get; set; }
+            public int ArgumentMatches { get; set; }
         }
     }
 }

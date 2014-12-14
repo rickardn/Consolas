@@ -21,7 +21,9 @@ namespace Consolas.Core.Tests
                     typeof(TwoParameters), 
                     typeof(SingleParameter), 
                     typeof(BooleanParameter),
-                    typeof(MultiTypeParameter)
+                    typeof(MultiTypeParameter),
+                    typeof(SimilarArguments),
+                    typeof(SimilarArgumentsToo)
                 },
             };
         }
@@ -148,6 +150,34 @@ namespace Consolas.Core.Tests
         {
             matcher.MatchToObject<SingleParameter>(new string[0])
                    .ShouldBeNull();
+        }
+
+        [Test]
+        public void Match_ArgumentsWithSimilarProperties_ReturnsTheBestMatching()
+        {
+            Type result = matcher.Match(new[] {"-Type", "True", "-Argument", "foo"});
+            Assert.That(result, Is.EqualTo(typeof(SimilarArgumentsToo)));
+        }
+
+        [Test]
+        public void Match_ArgumentsWithSimilarProperties_ReturnsTheBestMatching2()
+        {
+            Type result = matcher.Match(new[] { "-Type", "-Argument", "foo" });
+            Assert.That(result, Is.EqualTo(typeof(SimilarArgumentsToo)));
+        }
+
+        [Test]
+        public void Match_ArgumentsWithSimilarProperties_ReturnsTheBestMatching3()
+        {
+            Type result = matcher.Match(new[] { "-Argument", "foo", "-Type" });
+            Assert.That(result, Is.EqualTo(typeof(SimilarArgumentsToo)));
+        }
+        
+        [Test]
+        public void Match_ArgumentsWithSimilarPropertiesNonDeterministic_ThrowsException()
+        {
+            TestDelegate match = () => matcher.Match(new[] { "-Argument", "foo" });
+            Assert.Throws<Exception>(match);
         }
     }
 }

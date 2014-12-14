@@ -15,6 +15,12 @@ namespace Consolas.Core
     public abstract class ConsoleApp
     {
         /// <summary>
+        ///     A collection of argument types. Use this property to add new types which should be 
+        ///     used to match against.
+        /// </summary>
+        public ArgumentTypeCollection Arguments { get; set; }
+
+        /// <summary>
         ///     A collection of view engines. Use this property to add new view engines
         ///     to the application.
         /// </summary>
@@ -81,8 +87,9 @@ namespace Consolas.Core
             _container = new Container();
             _container.Options.AllowOverridingRegistrations = true;
 
+            app.Arguments = app.Arguments ?? new ArgumentTypeCollection();
             app.ViewEngines = app.ViewEngines ?? new ViewEngineCollection(_container);
-            
+
             _container.RegisterInitializer<Command>(command =>
             {
                 command.ViewEngines = app.ViewEngines;
@@ -105,7 +112,7 @@ namespace Consolas.Core
 
             // ReSharper disable PossibleNullReferenceException
             foreach (StackFrame frame in stackFrames)
-                // ReSharper restore PossibleNullReferenceException
+            // ReSharper restore PossibleNullReferenceException
             {
                 var method = frame.GetMethod();
                 if (method.Name != InitMethodName)
@@ -125,14 +132,18 @@ namespace Consolas.Core
 
         private CommandType FindCommandType(string[] args, Assembly callingAssembly)
         {
-            var argTypes = callingAssembly.GetTypes().ToList();
+            List<Type> argTypes = Arguments.Count > 0 
+                ? Arguments
+                : callingAssembly.GetTypes().Where(t => t.Name.EndsWith("Args")).ToList();
             _argumentMatcher = new ArgumentMatcher
             {
                 Types = argTypes
             };
 
-            var argsType = _argumentMatcher.Match(args);
-            var commandType = FindMatchingCommandType(argTypes, argsType);
+            var allTypes = callingAssembly.GetTypes().ToList();
+
+            Type argsType = _argumentMatcher.Match(args);
+            Type commandType = FindMatchingCommandType(allTypes, argsType);
 
             if (commandType != null)
             {
