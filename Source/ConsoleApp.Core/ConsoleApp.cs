@@ -14,6 +14,12 @@ namespace Consolas.Core
     /// </summary>
     public abstract class ConsoleApp
     {
+        private const string InitMethodName = "Match";
+        private const string ExecuteMethod = "Execute";
+        private const string DefaultViewName = "Default";
+        private ArgumentMatcher _argumentMatcher;
+        private static Container _container;
+
         /// <summary>
         ///     A collection of argument types. Use this property to add new types which should be 
         ///     used to match against.
@@ -76,12 +82,6 @@ namespace Consolas.Core
             return false;
         }
 
-        private const string InitMethodName = "Match";
-        private const string ExecuteMethod = "Execute";
-        private const string DefaultViewName = "Default";
-        private ArgumentMatcher _argumentMatcher;
-        private static Container _container;
-
         private static void Configure(ConsoleApp app)
         {
             _container = new Container();
@@ -142,7 +142,16 @@ namespace Consolas.Core
 
             var allTypes = callingAssembly.GetTypes().ToList();
 
-            Type argsType = _argumentMatcher.Match(args);
+            Type argsType = null;
+            try
+            {
+                argsType = _argumentMatcher.Match(args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             Type commandType = FindMatchingCommandType(allTypes, argsType);
 
             if (commandType != null)

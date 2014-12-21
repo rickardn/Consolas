@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Consolas.Core.Tests.Helpers;
+using NUnit.Framework;
 using Should;
 using SimpleInjector;
 

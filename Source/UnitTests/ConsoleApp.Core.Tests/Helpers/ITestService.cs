@@ -1,4 +1,4 @@
-﻿namespace Consolas.Core.Tests
+﻿namespace Consolas.Core.Tests.Helpers
 {
     public interface ITestService
     {

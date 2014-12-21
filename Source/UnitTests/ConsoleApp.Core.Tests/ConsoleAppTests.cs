@@ -127,5 +127,33 @@ namespace Consolas.Core.Tests
             StringAssert.Contains("Execute 2", ConsoleOut.ToString());
         }
 
+        [TestCase(new[] { "-Arg2", "-Arg" }, "ConflictingArgs1")]
+        [TestCase(new[] { "-Arg", "-Arg2" }, "ConflictingArgs1")]
+        [TestCase(new[] { "-Arg", "1", "-Arg2", "2" }, "ConflictingArgs1")]
+        [TestCase(new[] { "-Arg2", "1", "-Arg", "2" }, "ConflictingArgs1")]
+        public void Match_ConflictingArgs_EndToEndTest(string[] args, string expected)
+        {
+            var sut = new SimpleConsoleApp();
+
+            sut.Main(args);
+
+            StringAssert.Contains(expected, ConsoleOut.ToString());
+        }
+
+        [Test]
+        public void Match_ConflictingNonDeterministicArgs_EndToEndTest()
+        {
+            var sut = new SimpleConsoleApp();
+
+            sut.Main(new[] { "-Arg" });
+
+            string output = ConsoleOut.ToString();
+
+            // Should print exception message
+            StringAssert.Contains("non deterministic", output);
+
+            // Should print the usage msg or default view!
+            StringAssert.Contains("Using:", output);
+        }
     }
 }

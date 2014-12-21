@@ -147,9 +147,10 @@ namespace Consolas.Core
             {
                 if (matchingTypesInOrder[0].ArgumentMatches == matchingTypesInOrder[1].ArgumentMatches)
                 {
-                    throw new Exception(string.Format("The arguments [{0}] and [{1}] are non deterministic", 
+                    throw new Exception(string.Format("The arguments [{0}] and [{1}] are non deterministic in respect to the args: {2}", 
                         matchingTypesInOrder[0].Type.Name,
-                        matchingTypesInOrder[1].Type.Name));
+                        matchingTypesInOrder[1].Type.Name,
+                        arguments));
                 }
             }
 
