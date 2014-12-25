@@ -69,6 +69,8 @@
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="CommandContext.cs" />
     <Compile Include="CommandResult.cs" />
+    <Compile Include="CommandSet.cs" />
+    <Compile Include="CommandType.cs" />
     <Compile Include="Consolas.Mustache\MustacheView.cs" />
     <Compile Include="Consolas.Mustache\MustacheViewEngine.cs" />
     <Compile Include="ConsoleApp.cs" />

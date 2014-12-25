@@ -33,7 +33,7 @@ namespace Consolas.Core
         public ViewEngineCollection ViewEngines { get; set; }
 
         /// <summary>
-        ///     Overide to configure your console application and register dependencies.
+        ///     Overide to configure your console application and register dependencies with the container.
         /// </summary>
         /// <param name="container"></param>
         public virtual void Configure(Container container) {}
@@ -53,25 +53,30 @@ namespace Consolas.Core
             ConsoleApp app = CreateConsoleApp();
             Configure(app);
 
-            CommandType commandType = app.FindCommandType(args, callingAssembly);
+            app.FindAndExecuteCommand(args, callingAssembly);
+        }
+
+        private void FindAndExecuteCommand(string[] args, Assembly callingAssembly)
+        {
+            CommandType commandType = FindCommandType(args, callingAssembly);
 
             if (commandType != null)
             {
-                CommandSet commandSet = app.CreateCommandWithArgs(args, commandType);
-                app.ExecuteCommand(commandType.Command, commandSet);
+                CommandSet commandSet = CreateCommandWithArgs(args, commandType);
+                ExecuteCommand(commandType.Command, commandSet);
             }
-            else if (!TryRenderDefaultView(callingAssembly, app))
+            else if (!TryRenderDefaultView(callingAssembly))
             {
                 Console.WriteLine("Using: {0}.exe ...", callingAssembly.GetName().Name.ToLower());
             }
         }
 
-        private static bool TryRenderDefaultView(Assembly callingAssembly, ConsoleApp app)
+        private bool TryRenderDefaultView(Assembly callingAssembly)
         {
             try
             {
                 var context = new CommandContext(callingAssembly);
-                var view = app.ViewEngines.FindView(context, DefaultViewName);
+                var view = ViewEngines.FindView(context, DefaultViewName);
                 var result = view.Render<object>(null);
                 Console.WriteLine(result);
                 return true;
@@ -94,8 +99,7 @@ namespace Consolas.Core
             {
                 command.ViewEngines = app.ViewEngines;
             });
-
-
+            
             CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
             
             app.ViewEngines.Add(new MustacheViewEngine());
@@ -249,18 +253,6 @@ namespace Consolas.Core
                 result = view.Render(commandResult.Model);
             }
             return result;
-        }
-
-        private class CommandType
-        {
-            public Type Command { get; set; }
-            public Type Args { get; set; }
-        }
-
-        private class CommandSet
-        {
-            public object Command { get; set; }
-            public object Args { get; set; }
         }
     }
 }
