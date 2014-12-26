@@ -68,6 +68,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="CommandContext.cs" />
+    <Compile Include="CommandExecutable.cs" />
     <Compile Include="CommandResult.cs" />
     <Compile Include="CommandSet.cs" />
     <Compile Include="CommandType.cs" />
@@ -75,8 +76,10 @@
     <Compile Include="Consolas.Mustache\MustacheViewEngine.cs" />
     <Compile Include="ConsoleApp.cs" />
     <Compile Include="DefaultArgumentsAttribute.cs" />
+    <Compile Include="HelpCommandExecutable.cs" />
     <Compile Include="ICommandFactory.cs" />
     <Compile Include="IConsole.cs" />
+    <Compile Include="IExecutable.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IViewEngine.cs" />
     <Compile Include="IViewEngineFactory.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="ViewEngineCollection.cs" />
     <Compile Include="ViewEngineCollectionExtensions.cs" />
     <Compile Include="ViewEngineException.cs" />
+    <Compile Include="ViewExecutable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

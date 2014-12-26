@@ -18,7 +18,6 @@ namespace Consolas.Core.Tests.Helpers
                 Arguments.Add(type);
             }
 
-            base.Configure(container);
             ViewEngines.Clear();
         }
     }

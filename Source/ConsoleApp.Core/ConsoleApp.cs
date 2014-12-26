@@ -44,47 +44,43 @@ namespace Consolas.Core
         /// <param name="args"></param>
         protected static void Match(string[] args)
         {
-            #region Do not refactor
-
-            Assembly callingAssembly = Assembly.GetCallingAssembly();
-
-            #endregion
-
             ConsoleApp app = CreateConsoleApp();
             Configure(app);
 
-            app.FindAndExecuteCommand(args, callingAssembly);
+            IExecutable executable = app.FindExecutable(args);
+            if (executable != null)
+            {
+                executable.Execute();
+            }
         }
 
-        private void FindAndExecuteCommand(string[] args, Assembly callingAssembly)
+        private IExecutable FindExecutable(string[] args)
         {
-            CommandType commandType = FindCommandType(args, callingAssembly);
+            CommandType commandType = FindCommandType(args);
 
             if (commandType != null)
             {
-                CommandSet commandSet = CreateCommandWithArgs(args, commandType);
-                ExecuteCommand(commandType.Command, commandSet);
+                return new CommandExecutable(args, commandType, _argumentMatcher);
             }
-            else if (!TryRenderDefaultView(callingAssembly))
-            {
-                Console.WriteLine("Using: {0}.exe ...", callingAssembly.GetName().Name.ToLower());
-            }
+            
+            var defaultView = TryFindDefaultView();
+            return defaultView 
+                ?? new HelpCommandExecutable(GetType().Assembly);
         }
 
-        private bool TryRenderDefaultView(Assembly callingAssembly)
+        private IExecutable TryFindDefaultView()
         {
             try
             {
-                var context = new CommandContext(callingAssembly);
-                var view = ViewEngines.FindView(context, DefaultViewName);
-                var result = view.Render<object>(null);
-                Console.WriteLine(result);
-                return true;
+                var context = new CommandContext(GetType().Assembly);
+                IView view = ViewEngines.FindView(context, DefaultViewName);
+                return new ViewExecutable(view);
             }
-            catch (ViewEngineException)
+            catch (ViewEngineException e)
             {
+                Console.WriteLine(e);
             }
-            return false;
+            return null;
         }
 
         private static void Configure(ConsoleApp app)
@@ -134,17 +130,18 @@ namespace Consolas.Core
             return consoleApp;
         }
 
-        private CommandType FindCommandType(string[] args, Assembly callingAssembly)
+        private CommandType FindCommandType(string[] args)
         {
+            Assembly appAssembly = GetType().Assembly;
             List<Type> argTypes = Arguments.Count > 0 
                 ? Arguments
-                : callingAssembly.GetTypes().Where(t => t.Name.EndsWith("Args")).ToList();
+                : appAssembly.GetTypes().Where(t => t.Name.EndsWith("Args")).ToList();
             _argumentMatcher = new ArgumentMatcher
             {
                 Types = argTypes
             };
 
-            var allTypes = callingAssembly.GetTypes().ToList();
+            var allTypes = appAssembly.GetTypes().ToList();
 
             Type argsType = null;
             try
@@ -177,82 +174,11 @@ namespace Consolas.Core
             return null;
         }
 
-        private CommandSet CreateCommandWithArgs(string[] args, CommandType commandType)
-        {
-            object command = CommandBuilder.Current.GetCommandInstance(commandType.Command);
-            object arg = _argumentMatcher.MatchToObject(args, commandType.Args);
-
-            return new CommandSet
-            {
-                Command = command,
-                Args = arg
-            };
-        }
-
-        private void ExecuteCommand(Type commandType, CommandSet command)
-        {
-            var executeMethod = FindExecuteMethod(commandType, command);
-            var result = TryInvokeCommand(command, executeMethod);
-            result = HandleCommandResult(command, result);
-
-            Console.WriteLine(result);
-        }
-
-        private static MethodInfo FindExecuteMethod(Type commandType, CommandSet command)
-        {
-            MethodInfo executeMethodInfo = null;
-
-            IEnumerable<MethodInfo> methods =
-                from method in commandType.GetMethods()
-                where method.Name == ExecuteMethod
-                select method;
-
-            foreach (MethodInfo method in methods)
-            {
-                ParameterInfo[] parameters = method.GetParameters();
-                foreach (var parameter in parameters)
-                {
-                    if (parameter.ParameterType == command.Args.GetType())
-                    {
-                        executeMethodInfo = method;
-                        break;
-                    }
-                }
-            }
-            return executeMethodInfo;
-        }
-
         private Type FindMatchingCommandType(IEnumerable<Type> argTypes, Type argsType)
         {
             return
                 argTypes.FirstOrDefault(
                     x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
-        }
-
-        private static object TryInvokeCommand(CommandSet command, MethodInfo methodInfo)
-        {
-            object result;
-            try
-            {
-                result = methodInfo.Invoke(command.Command, new[] {command.Args});
-            }
-            catch (TargetInvocationException e)
-            {
-                throw e.InnerException;
-            }
-            return result;
-        }
-
-        private object HandleCommandResult(CommandSet commandSet, object result)
-        {
-            var commandResult = result as CommandResult;
-            if (commandResult != null)
-            {
-                var command = (Command) commandSet.Command;
-                var view = ViewEngines.FindView(command.Context, commandResult.ViewName);
-                result = view.Render(commandResult.Model);
-            }
-            return result;
         }
     }
 }
