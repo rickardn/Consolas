@@ -17,6 +17,14 @@ namespace Consolas.Core.Tests
         }
 
         [Test]
+        public void Match_FullFilePath_EndToEndTest()
+        {
+            var sut = new SimpleConsoleApp();
+            sut.Main(new[] { @"C:\fullpath\foo.txt" });
+            StringAssert.Contains("DefaultCommand", ConsoleOut.ToString());
+        }
+
+        [Test]
         public void Match_ExplicitDefaultArguments_EndToEndTest()
         {
             var sut = new SimpleConsoleApp();
