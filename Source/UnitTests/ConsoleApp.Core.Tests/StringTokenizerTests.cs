@@ -36,19 +36,19 @@ namespace Consolas.Core.Tests
 
         [TestCase("--", new[] { "--" })]
         [TestCase("--foo", new[] { "--", "foo" })]
-        [TestCase("foo--", new[] { "foo", "--" })]
-        [TestCase("foo--bar", new[] { "foo", "--", "bar" })]
+        [TestCase("foo--", new[] { "foo--" })]
+        [TestCase("foo--bar", new[] { "foo--bar" })]
         public void Tokenize_SingleMultiCharOperator_ReturnsTokens(string text, string[] expected)
         {
             ShouldTokenize(text, expected);
         }
 
         [TestCase("----", new[] { "--", "--" })]
-        [TestCase("------", new[] { "--", "--", "--" })]
-        [TestCase("--------", new[] { "--", "--", "--", "--" })]
-        [TestCase("foo----", new[] { "foo", "--", "--" })]
-        [TestCase("--foo--", new[] { "--", "foo", "--" })]
-        [TestCase("----foo", new[] { "--", "--", "foo" })]
+        [TestCase("------", new[] { "--", "----" })]
+        [TestCase("--------", new[] { "--", "------" })]
+        [TestCase("foo----", new[] { "foo----" })]
+        [TestCase("--foo--", new[] { "--", "foo--" })]
+        [TestCase("----foo", new[] { "--", "--foo" })]
         public void Tokenize_MultipleMultiCharOperators_ReturnsTokens(string text, string[] expected)
         {
             ShouldTokenize(text, expected);
@@ -56,43 +56,43 @@ namespace Consolas.Core.Tests
 
         [TestCase("-", new[] { "-" })]
         [TestCase("-foo", new[] { "-", "foo" })]
-        [TestCase("foo-", new[] { "foo", "-" })]
-        [TestCase("foo-bar", new[] { "foo", "-", "bar" })]
+        [TestCase("foo-", new[] { "foo-" })]
+        [TestCase("foo-bar", new[] { "foo-bar" })]
         
         [TestCase("/", new[] { "/" })]
         [TestCase("/foo", new[] { "/", "foo" })]
-        [TestCase("foo/", new[] { "foo", "/" })]
-        [TestCase("foo/bar", new[] { "foo", "/", "bar" })]
+        [TestCase("foo/", new[] { "foo/" })]
+        [TestCase("foo/bar", new[] { "foo/bar" })]
 
         [TestCase("+", new[] { "+" })]
-        [TestCase("+foo", new[] { "+", "foo" })]
-        [TestCase("foo+", new[] { "foo", "+" })]
-        [TestCase("foo+bar", new[] { "foo", "+", "bar" })]
+        [TestCase("+foo", new[] { "+foo" })]
+        [TestCase("foo+", new[] { "foo+" })]
+        [TestCase("foo+bar", new[] { "foo+bar" })]
         public void Tokenize_SingleOperator_ReturnsTokens(string text, string[] expected)
         {
             ShouldTokenize(text, expected);
         }
 
-        [TestCase("-foo-", new[] { "-", "foo", "-" })]
+        [TestCase("-foo-", new[] { "-", "foo-" })]
         [TestCase("//", new[] { "/", "/" })]
-        [TestCase("///", new[] { "/", "/", "/" })]
-        [TestCase("/foo/", new[] { "/", "foo", "/" })]
-        [TestCase("foo//", new[] { "foo", "/", "/" })]
-        [TestCase("//foo", new[] { "/", "/", "foo"})]
+        [TestCase("///", new[] { "/", "//" })]
+        [TestCase("/foo/", new[] { "/", "foo/" })]
+        [TestCase("foo//", new[] { "foo//" })]
+        [TestCase("//foo", new[] { "/", "/foo"})]
         public void Tokenize_MultipleOperators_ReturnsTokens(string text, string[] expected)
         {
             ShouldTokenize(text, expected);
         }
 
         [TestCase("---", new[] { "--", "-" })]
-        [TestCase("-----", new[] { "--", "--", "-" })]
+        [TestCase("-----", new[] { "--", "---" })]
         [TestCase("---", new[] { "--", "-" })]
-        [TestCase("-/+", new[] { "-", "/", "+" })]
-        [TestCase("---/+", new[] { "--", "-", "/", "+" })]
-        [TestCase("-/--+", new[] { "-", "/", "--", "+" })]
-        [TestCase("-/+--", new[] { "-", "/", "+", "--" })]
-        [TestCase("-a/b+c--", new[] { "-", "a", "/", "b", "+", "c", "--" })]
-        [TestCase("a-b/c+d--e", new[] { "a", "-", "b", "/", "c", "+", "d", "--", "e" })]
+        [TestCase("-/+", new[] { "-", "/+" })]
+        [TestCase("---/+", new[] { "--", "-/+" })]
+        [TestCase("-/--+", new[] { "-", "/--+" })]
+        [TestCase("-/+--", new[] { "-", "/+--" })]
+        [TestCase("-a/b+c--", new[] { "-", "a/b+c--" })]
+        [TestCase("a-b/c+d--e", new[] { "a-b/c+d--e" })]
         public void Tokenize_DifferentOperators_ReturnsTokens(string text, string[] expected)
         {
             ShouldTokenize(text, expected);

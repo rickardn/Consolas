@@ -35,6 +35,7 @@ namespace Consolas.Core.Tests
             var result = Parse(new[] {"arg"});
             result["arg"].IsMatch.ShouldBeTrue();
             result["arg"].IsDefault.ShouldBeTrue();
+            result["arg"].Value.ShouldEqual("arg");
             result.Count.ShouldEqual(1);
         }
 
@@ -202,19 +203,37 @@ namespace Consolas.Core.Tests
             result["bool"].Value.ShouldEqual("False");
         }
 
-        [TestCase(new[] { "--/name", "value" }, null)]
-        [TestCase(new[] { "---name", "value" }, null)]
-        [TestCase(new[] { "--+name", "value" }, null)]
-        [TestCase(new[] { "-+name", "value" }, null)]
-        [TestCase(new[] { "/-name", "value" }, null)]
-        [TestCase(new[] { "//name", "value" }, null)]
-        [TestCase(new[] { "-name!", "value" }, null)]
-        [TestCase(new[] { "-name ", "value" }, null)]
-        [TestCase(new[] { "- name", "value" }, null)]
-        [TestCase(new[] { " name", "value" }, null)]
-        [TestCase(new[] { "-name_", "value" }, null)]
-        [TestCase(new[] { "-_name", "value" }, null)]
-        public void Parse_InvalidName_ThrowsException(string[] args, string s)
+        [Test]
+        public void Parse_FullPath_ReturnsArgument()
+        {
+            var result = Parse(new[] {@"C:\full\path.txt"});
+            result.Count.ShouldEqual(1);
+            result[@"C:\full\path.txt"].IsMatch.ShouldBeTrue();
+            result[@"C:\full\path.txt"].IsDefault.ShouldBeTrue();
+        }
+
+        [Test]
+        public void Parse_FullPathWithSpaces_ReturnsArgument()
+        {
+            var result = Parse(new[] { @"C:\full\path with space.txt" });
+            result.Count.ShouldEqual(1);
+            result[@"C:\full\path with space.txt"].IsMatch.ShouldBeTrue();
+            result[@"C:\full\path with space.txt"].IsDefault.ShouldBeTrue();
+        }
+
+        [TestCase(new[] { "--/name", "value" }, 0)]
+        [TestCase(new[] { "---name", "value" }, 0)]
+        [TestCase(new[] { "--+name", "value" }, 0)]
+        [TestCase(new[] { "-+name", "value" }, 0)]
+        [TestCase(new[] { "/-name", "value" }, 0)]
+        [TestCase(new[] { "//name", "value" }, 0)]
+        [TestCase(new[] { "-name!", "value" }, 0)]
+        [TestCase(new[] { "-name ", "value" }, 0)]
+        [TestCase(new[] { "- name", "value" }, 0)]
+        [TestCase(new[] { " name", "value" }, 0)]
+        [TestCase(new[] { "-name_", "value" }, 0)]
+        [TestCase(new[] { "-_name", "value" }, 0)]
+        public void Parse_InvalidName_ThrowsException(string[] args, int s)
         {
             Assert.Throws<Exception>(() => Parse(args));
         }

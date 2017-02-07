@@ -24,18 +24,15 @@ namespace Consolas.Core
 
         private void Args()
         {
-            if (Arg()) 
-            do WhiteSpace(); 
+            if (Arg())
+            do WhiteSpace();
             while (Arg());
         }
 
         private bool Arg()
         {
-            if (Prefix)
-                Statement();
-            else
-                Value(isDefault: true);
-
+            if (Prefix) Statement();
+            else Value(isDefault: true);
             return End();
         }
 
@@ -51,8 +48,7 @@ namespace Consolas.Core
         {
             get
             {
-                var prefix = Peek();
-                if (Tokens.Prefix.IsMatch(prefix))
+                if (Tokens.Prefix.IsMatch(Peek()))
                 {
                     Dequeue();
                     return true;
@@ -63,13 +59,83 @@ namespace Consolas.Core
 
         private bool Statement()
         {
-            var name = Name();
-            return 
-                ValueStatement(name) 
-             || BooleanStatement(name);
+            return
+                ValueStatement()
+             || BooleanStatement()
+             || Error("statement");
         }
 
-        private void Value(string name = null, string val = null, bool isDefault = false)
+        private bool ValueStatement()
+        {
+            return 
+                AssignmentStatement()
+             || PropertyStatement();
+        }
+
+        private bool BooleanStatement()
+        {
+            var booleanStatement = Tokens.BooleanStatement.Match(Peek());
+
+            if (booleanStatement.Success)
+            {
+                Dequeue();
+
+                var name = booleanStatement.Groups["name"]?.Value;
+                var @operator = booleanStatement.Groups["operator"]?.Value;
+
+                if (!string.IsNullOrEmpty(@operator))
+                {
+                    _queue.DeDequeue(@operator);
+                }
+
+                return BooleanArgument(name);
+            }
+
+            return false;
+        }
+
+        private bool AssignmentStatement()
+        {
+            var assignmentStatement = Tokens.AssigmentStatement.Match(Peek());
+
+            if (assignmentStatement.Success)
+            {
+                Dequeue();
+
+                var name = assignmentStatement.Groups["name"]?.Value;
+                var op = assignmentStatement.Groups["operator"]?.Value;
+                var value = assignmentStatement.Groups["value"]?.Value;
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _queue.DeDequeue(value);
+                }
+                _queue.DeDequeue(op);
+
+                return ValueArgument(name);
+            }
+            return false;
+        }
+
+        private bool PropertyStatement()
+        {
+            var name = Peek();
+            if (Tokens.Name.IsMatch(name))
+            {
+                Dequeue();
+
+                if (Tokens.WhiteSpace.IsMatch(Peek()))
+                {
+                    return ValueArgument(name);
+                }
+
+                _queue.DeDequeue(name);
+            }
+            return false;
+        }
+
+        private void Value(string name = null, string val = null, 
+            bool isDefault = false)
         {
             var value = val ?? GetValue();
             _arguments.Add(name ?? value, new Argument
@@ -90,26 +156,45 @@ namespace Consolas.Core
             throw Error(value, "value");
         }
 
-        private bool IsValue(string value)
+        private static bool IsValue(string value)
         {
             return Tokens.Value.IsMatch(value);
         }
 
-        private bool ValueStatement(string name)
+        private bool ValueArgument(string name)
+        {
+            return 
+                AssingmentWithoutOperator(name) 
+             || AssinmentWithOperator(name);
+        }
+
+        private bool AssingmentWithoutOperator(string name)
         {
             var @operator = Peek();
 
-            if (@operator == " ")
+            if (Tokens.WhiteSpace.IsMatch(@operator))
             {
-                @operator = Dequeue();
+                Operator();
+
                 if (!IsValue(Peek()))
                 {
                     _queue.DeDequeue(@operator);
+                    _queue.DeDequeue(name);
                     return false;
                 }
                 Value(name: name);
+
+                return true;
             }
-            else if (Tokens.Operator.IsMatch(@operator))
+
+            return false;
+        }
+
+        private bool AssinmentWithOperator(string name)
+        {
+            var @operator = Peek();
+
+            if (Tokens.AssignmentOperator.IsMatch(@operator))
             {
                 Operator();
 
@@ -119,18 +204,15 @@ namespace Consolas.Core
                 }
                 else
                 {
-                     Value(name: name, val: "");
+                    Value(name: name, val: "");
                 }
-            }
-            else
-            {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
-        private bool BooleanStatement(string name)
+        private bool BooleanArgument(string name)
         {
             var value = true.ToString();
 
@@ -141,7 +223,7 @@ namespace Consolas.Core
                 boolOperator = (boolOperator == "+").ToString();
                 value = boolOperator;
             }
-            
+
             _arguments.Add(name, new Argument
             {
                 Value = value,
@@ -151,28 +233,14 @@ namespace Consolas.Core
             return true;
         }
 
-        private string Name()
-        {
-            if (_queue.Count == 0)
-                throw UnexpectedEnd("name");
-            
-            var name = Peek();
-
-            if (Tokens.Name.IsMatch(name))
-            {
-                return Dequeue();
-            }
-            throw Error(name, "name");
-        }
-
         private void Operator()
         {
             Dequeue();
         }
 
-        private Exception UnexpectedEnd(string name)
+        private bool Error(string name)
         {
-            return new Exception(string.Format("Unexpected end of string at {0}", name));
+            throw Error(Peek(), name);
         }
 
         private Exception Error(string token, string name)
@@ -192,8 +260,8 @@ namespace Consolas.Core
 
         private string Peek()
         {
-            return _queue.Count > 0 
-                ? _queue.Peek() 
+            return _queue.Count > 0
+                ? _queue.Peek()
                 : "";
         }
     }

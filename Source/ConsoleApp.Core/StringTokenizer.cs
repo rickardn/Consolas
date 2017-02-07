@@ -1,69 +1,35 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Consolas.Core
 {
     public class StringTokenizer
     {
-        private string[] _operators = { "--", "-", "/", "+" };
-
-        public string[] Operators
-        {
-            get { return _operators; }
-            set { _operators = value; }
-        }
+        private static readonly Regex HasPrefix = 
+            new Regex(@"^(?'prefix'\-\-|\-|/)(?'name'.*)$", RegexOptions.Compiled);
 
         public IEnumerable<string> Tokenize(string text)
         {
-            return Tokenize(text, Operators);
-        }
-
-        private IEnumerable<string> Tokenize(string text, string[] operators)
-        {
-            if (operators.Length == 0)
+            if (string.IsNullOrEmpty(text))
             {
-                if (text.Length > 0)
-                    yield return text;
                 yield break;
             }
 
-            var op = operators[0];
-
-            var i = text.IndexOf(op, StringComparison.Ordinal);
-            if (i >= 0)
+            var match = HasPrefix.Match(text);
+            if (match.Success)
             {
-                var head = text.Substring(0, i);
-                if (head.Length > 0)
-                {
-                    var ops = operators.Skip(1).ToArray();
+                var prefix = match.Groups["prefix"].Value;
+                yield return prefix;
 
-                    foreach (var token in Tokenize(head, ops))
-                    {
-                        yield return token;
-                    }
-                }
-                
-                yield return op;
-
-                var tail = text.Substring(i + op.Length);
-                if (tail.Length > 0)
+                var name = match.Groups["name"].Value;
+                if (!string.IsNullOrEmpty(name))
                 {
-                    foreach (var token in Tokenize(tail))
-                    {
-                        yield return token;
-                    }
+                    yield return name;
                 }
             }
-            else if (text.Length > 0)
+            else
             {
-                var ops = operators.Skip(1).ToArray();
-
-                foreach (var token in Tokenize(text, ops))
-                {
-                    yield return token;
-                }
-                
+                yield return text;
             }
         }
     }

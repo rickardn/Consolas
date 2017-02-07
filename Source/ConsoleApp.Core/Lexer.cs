@@ -2,22 +2,29 @@
 {
     public class Lexer
     {
-        private readonly StringTokenizer _stringTokenizer = new StringTokenizer
-        {
-            Operators = Tokens.Operators
-        };
+        private readonly StringTokenizer _stringTokenizer = 
+            new StringTokenizer();
 
-        public Queue<string> Tokenize(string[] args)
+        public Queue<string> Tokenize(string[] arguments)
         {
             var queue = new Queue<string>();
+            arguments = arguments ?? new string[0];
 
-            var text = string.Join(" ", args ?? new string[0]);
-
-            foreach (var token in _stringTokenizer.Tokenize(text))
+            var i = 0;
+            foreach (var argument in arguments)
             {
-                queue.Enqueue(token);
-            }
+                foreach (var token in _stringTokenizer.Tokenize(argument))
+                {
+                    queue.Enqueue(token);
+                }
 
+                if (i < arguments.Length - 1)
+                {
+                    queue.Enqueue(" ");
+                }
+                i++;
+            }
+            
             return queue;
         }
     }

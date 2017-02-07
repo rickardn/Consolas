@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Should;
 
 namespace Consolas.Core.Tests
@@ -111,21 +107,21 @@ namespace Consolas.Core.Tests
         public void Parse_AltOperator_ReturnsTokens()
         {
             var result = Tokenize(new[] {"-name:value", "-foo=bar"});
-            result.ShouldEqual(new [] {"-", "name", ":", "value", " ", "-", "foo", "=", "bar"});
+            result.ShouldEqual(new [] {"-", "name:value", " ", "-", "foo=bar"});
         }
 
-        [TestCase("-name::value", new[] { "-", "name", ":", ":", "value" })]
-        [TestCase("-name==value", new[] { "-", "name", "=", "=", "value" })]
-        [TestCase("-name:=value", new[] { "-", "name", ":", "=", "value" })]
-        [TestCase("-name=:value", new[] { "-", "name", "=", ":", "value" })]
+        [TestCase("-name::value", new[] { "-", "name::value" })]
+        [TestCase("-name==value", new[] { "-", "name==value" })]
+        [TestCase("-name:=value", new[] { "-", "name:=value" })]
+        [TestCase("-name=:value", new[] { "-", "name=:value" })]
         public void Parse_MoreThanOneOperator_ReturnsTokens(string arg, string[] exptected)
         {
             var result = Tokenize(new[] {arg});
             result.ShouldEqual(exptected);
         }
 
-        [TestCase("-name:", new[] {"-", "name", ":"})]
-        [TestCase("-name=", new[] {"-", "name", "="})]
+        [TestCase("-name:", new[] {"-", "name:"})]
+        [TestCase("-name=", new[] {"-", "name="})]
         public void Parse_OperatorEmptyValue_ReturnsTokens(string arg, string[] exptected)
         {
             var result = Tokenize(new[] {arg});
@@ -136,14 +132,14 @@ namespace Consolas.Core.Tests
         public void Parse_BooleanPlusOperator_ReturnsTokens()
         {
             var result = Tokenize(new[] {"-bool+"});
-            result.ShouldEqual(new[] { "-", "bool", "+" });
+            result.ShouldEqual(new[] { "-", "bool+" });
         }
 
         [Test]
         public void Parse_BooleanMinusOperator_ReturnsTokens()
         {
             var result = Tokenize(new[] { "-bool-" });
-            result.ShouldEqual(new [] {"-", "bool", "-"});
+            result.ShouldEqual(new [] {"-", "bool-"});
         }        
     }
 }

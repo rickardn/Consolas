@@ -28,7 +28,7 @@ namespace Consolas.Core.Tests
         [TestCase(":")]
         public void Operator_ShouldMatch(string input)
         {
-            Tokens.Operator.IsMatch(input).ShouldBeTrue();
+            Tokens.AssignmentOperator.IsMatch(input).ShouldBeTrue();
         }
 
         [TestCase("")]
@@ -42,7 +42,7 @@ namespace Consolas.Core.Tests
         [TestCase(":=:")]
         public void Operator_ShouldNotMatch(string input)
         {
-            Tokens.Operator.IsMatch(input).ShouldBeFalse();
+            Tokens.AssignmentOperator.IsMatch(input).ShouldBeFalse();
         }
 
         [TestCase("-")]
@@ -149,6 +149,49 @@ namespace Consolas.Core.Tests
         public void WhiteSpace_ShouldNotMatch(string input)
         {
             Tokens.WhiteSpace.IsMatch(input).ShouldBeFalse();
+        }
+
+        [TestCase("a")]
+        [TestCase("b")]
+        [TestCase("A")]
+        [TestCase("Abc")]
+        [TestCase("A0b1c2")]
+        [TestCase("a+")]
+        [TestCase("A+")]
+        [TestCase("Ab+")]
+        [TestCase("Abc+")]
+        [TestCase("A0b1c2+")]
+        [TestCase("a-")]
+        [TestCase("A-")]
+        [TestCase("Ab-")]
+        [TestCase("Abc-")]
+        [TestCase("A0b1c2-")]
+        public void BooleanStatement_ShouldMatch(string input) 
+        {
+            Tokens.BooleanStatement.IsMatch(input).ShouldBeTrue();
+        }
+
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase("!")]
+        [TestCase(":")]
+        [TestCase("\\")]
+        [TestCase("+")]
+        [TestCase("=")]
+        [TestCase("-")]
+        [TestCase("å")]
+        public void BooleanStatement_ShoulNoydMatch(string input)
+        {
+            Tokens.BooleanStatement.IsMatch(input).ShouldBeFalse();
+        }
+
+        [TestCase("A0b1c2d3=!##324%&/")]
+        [TestCase("A0b1c2d3==!##324%&/")]
+        [TestCase("A0b1c2d3:!##324%&/")]
+        [TestCase("A0b1c2d3::!##324%&/")]
+        public void AssignmentStatement_ShouldMatch(string input)
+        {
+            Tokens.AssigmentStatement.IsMatch(input).ShouldBeTrue();
         }
     }
 }
