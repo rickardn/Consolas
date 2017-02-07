@@ -62,7 +62,6 @@
     <Compile Include="Argument.cs" />
     <Compile Include="ArgumentMatcher.cs" />
     <Compile Include="ArgumentLL2Parser.cs" />
-    <Compile Include="ArgumentParser.cs" />
     <Compile Include="ArgumentSet.cs" />
     <Compile Include="ArgumentTypeCollection.cs" />
     <Compile Include="Command.cs" />
