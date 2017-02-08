@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Consolas.Mustache;
 using SimpleInjector;
 
@@ -106,28 +107,45 @@ namespace Consolas.Core
 
         private static ConsoleApp CreateConsoleApp()
         {
-            ConsoleApp consoleApp = null;
             var stack = new StackTrace();
             var stackFrames = stack.GetFrames();
+
+            var builder = new StringBuilder();
+
 
             // ReSharper disable PossibleNullReferenceException
             foreach (StackFrame frame in stackFrames)
             // ReSharper restore PossibleNullReferenceException
             {
                 var method = frame.GetMethod();
-                if (method.Name != InitMethodName)
-                {
-                    var declaringType = frame.GetMethod().DeclaringType;
-                    if (declaringType != null && declaringType.IsAbstract)
-                        continue;
 
-                    if (declaringType == null) continue;
-                    
+                builder.AppendLine(frame.ToString());
+                //method.DeclaringType.Name + "." + method.Name);
+
+
+                if (method.Name == InitMethodName) continue;
+
+                Type declaringType = method.DeclaringType;
+                if (declaringType == null) continue;
+                if (declaringType.IsAbstract) continue;
+
+                ConsoleApp consoleApp = null;
+
+                try
+                {
                     consoleApp = Activator.CreateInstance(declaringType) as ConsoleApp;
-                    break;
                 }
+                catch (MissingMethodException)
+                {
+                    // ignore
+                }
+
+                if (consoleApp == null) continue;
+
+                return consoleApp;
             }
-            return consoleApp;
+
+            throw new Exception("Unable to create Console App instance \n" + builder.ToString());
         }
 
         private CommandType FindCommandType(string[] args)
