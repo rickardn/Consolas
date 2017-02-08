@@ -14,6 +14,11 @@ namespace Samples.Ping.Commands
 
         public object Execute(PingArgs args)
         {
+            if (string.IsNullOrEmpty(args.Host))
+            {
+                return View("Default");
+            }
+
             var viewModel = new PingViewModel
             {
                 Host = args.Host,

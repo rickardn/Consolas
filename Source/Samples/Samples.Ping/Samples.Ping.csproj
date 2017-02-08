@@ -65,9 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Views\View.cstxt">
+    <EmbeddedResource Include="Views\View.cstxt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="Views\Default.template" />
   </ItemGroup>

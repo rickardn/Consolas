@@ -38,5 +38,12 @@ namespace Samples.Ping.Tests
             Program.Main(new [] {"-Host", "google.com"});
             StringAssert.Contains("Reply from google.com", _consoleOut.ToString());
         }
+
+        [Test]
+        public void Main_DefaultArgument_RendersResult()
+        {
+            Program.Main(new[] { "google.com" });
+            StringAssert.Contains("Reply from google.com", _consoleOut.ToString());
+        }
     }
 }
