@@ -49,10 +49,7 @@ namespace Consolas.Core
             Configure(app);
 
             IExecutable executable = app.FindExecutable(args);
-            if (executable != null)
-            {
-                executable.Execute();
-            }
+            executable?.Execute();
         }
 
         private IExecutable FindExecutable(string[] args)
