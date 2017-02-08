@@ -71,9 +71,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <EmbeddedResource Include="Views\ResourceView.cstxt" />
-    <Content Include="Views\View.cstxt">
+    <EmbeddedResource Include="Views\View.cstxt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Consolas.Razor\Consolas.Razor.csproj">

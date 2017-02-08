@@ -109,9 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\View.template">
+    <EmbeddedResource Include="Views\View.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ResourceView.template" />
   </ItemGroup>
   <ItemGroup>
