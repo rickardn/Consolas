@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Consolas.Mustache;
 using SimpleInjector;
 
@@ -13,14 +11,16 @@ namespace Consolas.Core
     ///     Defines the methods and properties that are common to all application objects in a Console application. This class
     ///     is the base class for applications that are defined by the user in a Program.cs file
     /// </summary>
-    public abstract class ConsoleApp
+    /// <typeparam name="TProgram">the user's application class</typeparam>
+    public abstract class ConsoleApp<TProgram>
+        where TProgram : ConsoleApp<TProgram>
     {
-        private const string InitMethodName = "Match";
-        private const string ExecuteMethod = "Execute";
+        // ReSharper disable once StaticMemberInGenericType
+        private static Container Container { get; set; }
+
         private const string DefaultViewName = "Default";
         private ArgumentMatcher _argumentMatcher;
-        private static Container _container;
-
+        
         /// <summary>
         ///     A collection of argument types. Use this property to add new types which should be 
         ///     used to match against.
@@ -45,7 +45,7 @@ namespace Consolas.Core
         /// <param name="args"></param>
         protected static void Match(string[] args)
         {
-            ConsoleApp app = CreateConsoleApp();
+            ConsoleApp<TProgram> app = CreateConsoleApp();
             Configure(app);
 
             IExecutable executable = app.FindExecutable(args);
@@ -66,7 +66,7 @@ namespace Consolas.Core
             
             var defaultView = TryFindDefaultView();
             return defaultView 
-                ?? new HelpCommandExecutable(GetType().Assembly);
+                   ?? new HelpCommandExecutable(GetType().Assembly);
         }
 
         private IExecutable TryFindDefaultView()
@@ -84,68 +84,30 @@ namespace Consolas.Core
             return null;
         }
 
-        private static void Configure(ConsoleApp app)
+        private static void Configure(ConsoleApp<TProgram> app)
         {
-            _container = new Container();
-            _container.Options.AllowOverridingRegistrations = true;
+            Container = new Container();
+            Container.Options.AllowOverridingRegistrations = true;
 
             app.Arguments = app.Arguments ?? new ArgumentTypeCollection();
-            app.ViewEngines = app.ViewEngines ?? new ViewEngineCollection(_container);
+            app.ViewEngines = app.ViewEngines ?? new ViewEngineCollection(Container);
 
-            _container.RegisterInitializer<Command>(command =>
+            Container.RegisterInitializer<Command>(command =>
             {
                 command.ViewEngines = app.ViewEngines;
             });
             
-            CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(_container));
+            CommandBuilder.Current.SetCommandFactory(new SimpleInjectorCommandFactory(Container));
             
             app.ViewEngines.Add(new MustacheViewEngine());
             
-            app.Configure(_container);
-            _container.Verify();
+            app.Configure(Container);
+            Container.Verify();
         }
 
-        private static ConsoleApp CreateConsoleApp()
+        private static ConsoleApp<TProgram> CreateConsoleApp()
         {
-            var stack = new StackTrace();
-            var stackFrames = stack.GetFrames();
-
-            var builder = new StringBuilder();
-
-
-            // ReSharper disable PossibleNullReferenceException
-            foreach (StackFrame frame in stackFrames)
-            // ReSharper restore PossibleNullReferenceException
-            {
-                var method = frame.GetMethod();
-
-                builder.AppendLine(frame.ToString());
-                //method.DeclaringType.Name + "." + method.Name);
-
-
-                if (method.Name == InitMethodName) continue;
-
-                Type declaringType = method.DeclaringType;
-                if (declaringType == null) continue;
-                if (declaringType.IsAbstract) continue;
-
-                ConsoleApp consoleApp = null;
-
-                try
-                {
-                    consoleApp = Activator.CreateInstance(declaringType) as ConsoleApp;
-                }
-                catch (MissingMethodException)
-                {
-                    // ignore
-                }
-
-                if (consoleApp == null) continue;
-
-                return consoleApp;
-            }
-
-            throw new Exception("Unable to create Console App instance \n" + builder.ToString());
+            return Activator.CreateInstance<TProgram>();
         }
 
         private CommandType FindCommandType(string[] args)

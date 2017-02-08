@@ -2,7 +2,7 @@
 
 namespace Consolas.Core.Tests.Helpers
 {
-    public class SimpleConsoleApp : ConsoleApp
+    public class SimpleConsoleApp : ConsoleApp<SimpleConsoleApp>
     {
         public void Main(string[] args)
         {

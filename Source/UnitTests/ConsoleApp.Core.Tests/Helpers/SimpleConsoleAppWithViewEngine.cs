@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace Consolas.Core.Tests.Helpers
 {
-    public class SimpleConsoleAppWithViewEngine : ConsoleApp
+    public class SimpleConsoleAppWithViewEngine : ConsoleApp<SimpleConsoleAppWithViewEngine>
     {
         public void Main(string[] args)
         {

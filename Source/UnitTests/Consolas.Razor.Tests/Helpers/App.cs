@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace Consolas.Razor.Tests.Helpers
 {
-    public class App : ConsoleApp
+    public class App : ConsoleApp<App>
     {
         public void Main(string[] args)
         {
