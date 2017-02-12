@@ -27,25 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consolas.Razor", "Consolas.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consolas.Razor.Tests", "UnitTests\Consolas.Razor.Tests\Consolas.Razor.Tests.csproj", "{C4AEE2FF-4ED8-49A3-BB89-E44CF29E6C1A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{269A1604-3C49-42ED-A626-9EF8EEC05740}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{9A46A4C5-BF86-4DF7-81E3-F7BD712F8557}"
-	ProjectSection(SolutionItems) = preProject
-		..\NuGet\NuGetPack.bat = ..\NuGet\NuGetPack.bat
-		..\NuGet\NuGetPush.bat = ..\NuGet\NuGetPush.bat
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{68FA68A2-CDD9-479A-BD4A-6A1E5449263D}"
 	ProjectSection(SolutionItems) = preProject
-		..\build\build.msbuild = ..\build\build.msbuild
-		..\build\copy.bat = ..\build\copy.bat
-		..\build\publish-all.bat = ..\build\publish-all.bat
+		..\build.cake = ..\build.cake
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolas", "Consolas", "{3C22E34F-DC5E-406E-B97F-0CAE06329351}"
