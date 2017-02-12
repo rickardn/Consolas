@@ -8,8 +8,9 @@ using SimpleInjector;
 namespace Consolas.Core
 {
     /// <summary>
-    ///     Defines the methods and properties that are common to all application objects in a Console application. This class
-    ///     is the base class for applications that are defined by the user in a Program.cs file
+    ///     Defines the methods and properties that are common to all application objects 
+    ///     in a Console application. This class is the base class for applications that 
+    ///     are defined by the user in a Program.cs file
     /// </summary>
     /// <typeparam name="TProgram">the user's application class</typeparam>
     public abstract class ConsoleApp<TProgram>
@@ -22,8 +23,8 @@ namespace Consolas.Core
         private ArgumentMatcher _argumentMatcher;
         
         /// <summary>
-        ///     A collection of argument types. Use this property to add new types which should be 
-        ///     used to match against.
+        ///     A collection of argument types. Use this property to add new types which 
+        ///     should be used to match against.
         /// </summary>
         public ArgumentTypeCollection Arguments { get; set; }
 
@@ -34,13 +35,15 @@ namespace Consolas.Core
         public ViewEngineCollection ViewEngines { get; set; }
 
         /// <summary>
-        ///     Overide to configure your console application and register dependencies with the container.
+        ///     Overide to configure your console application and register dependencies 
+        ///     with the container.
         /// </summary>
         /// <param name="container"></param>
         public virtual void Configure(Container container) {}
 
         /// <summary>
-        ///     Call <see cref="Match"/> in your Main method to start matching program arguments to commands in the application.
+        ///     Call <see cref="Match"/> in your Main method to start matching program 
+        ///     arguments to commands in the application.
         /// </summary>
         /// <param name="args"></param>
         protected static void Match(string[] args)
@@ -155,7 +158,8 @@ namespace Consolas.Core
         {
             return
                 argTypes.FirstOrDefault(
-                    x => x.GetMethods().Any(m => m.GetParameters().Any(p => p.ParameterType == argsType)));
+                    x => x.GetMethods().Any(m => m.GetParameters()
+                        .Any(p => p.ParameterType == argsType)));
         }
     }
 }
