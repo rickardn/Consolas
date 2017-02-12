@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Consolas</id>
-        <version>0.6.2</version>
+        <version>0.0.0</version>
         <title>Consolas - a console application framework for .NET</title>
         <authors>Consolas</authors>
         <owners>rickardnilsson.net</owners>
@@ -12,7 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Consolas is a console application framework providing a convention based approach to quickly building console apps. The framework is suited both for small throw away apps to large multi sub command apps with lots of arguments.</description>
         <releaseNotes />
-        <copyright>Copyright 2014 Consolas</copyright>
+        <copyright>Copyright (c) 2017 Rickard Nilsson</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.0">
                 <dependency id="SimpleInjector" version="2.5.0" />

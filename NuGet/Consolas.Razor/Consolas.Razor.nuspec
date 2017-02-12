@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Consolas.Razor</id>
-        <version>0.6.0</version>
+        <version>0.0.0</version>
         <title>Consolas Razor View Engine</title>
         <authors>Consolas</authors>
         <owners>rickardnilsson.net</owners>
@@ -11,8 +11,8 @@
         <iconUrl>http://www.rickardnilsson.net/image.axd?picture=consolas-icon_1.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Use Razor templates to create your Consolas views.</description>
-        <releaseNotes>Requires .NET Framework 4.5</releaseNotes>
-        <copyright>Copyright 2014 Consolas</copyright>
+        <releaseNotes>Requires .NET Framework 4.5+</releaseNotes>
+        <copyright>Copyright 2017 Consolas</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5">
                 <dependency id="RazorEngine" version="3.4.1" />
