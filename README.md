@@ -64,7 +64,7 @@ public class GrepCommandTests
             FileName = "doc.txt",
             Regex = "foo"
         });
-         
+
         StringAssert.Contains("foo bar baz", result);
     }
 }
@@ -126,3 +126,4 @@ Consolas makes use of the following OSS projects:
 - NUnit released under the NUnit licence: http://nunit.org/nuget/license.html
 - Should released under the Apache 2.0 license: https://github.com/erichexter/Should/blob/master/license.txt
 - NSubstitute released under the BSD license: https://raw.githubusercontent.com/nsubstitute/NSubstitute/master/LICENSE.txt
+- Cake released under the MIT license: https://github.com/cake-build/cake/blob/develop/LICENSE
