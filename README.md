@@ -31,7 +31,7 @@ public class HelpArgs
     public bool Help { get; set; }
 }
 
-public class HelpCommand : Command
+public class HelpCommand : Command<HelpCommand>
 {
     public string Execute(HelpArgs args)
     {
