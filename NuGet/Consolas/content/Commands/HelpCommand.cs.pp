@@ -3,7 +3,7 @@ using $rootnamespace$.Args;
 
 namespace $rootnamespace$.Commands
 {
-    public class HelpCommand : Command
+    public class HelpCommand : Command<HelpCommand>
     {
         public string Execute(HelpArgs args)
         {
