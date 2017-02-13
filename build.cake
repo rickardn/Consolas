@@ -68,11 +68,18 @@ Task("Test")
 });
 
 Task("Build")
+	.IsDependentOn("NuGetRestore")
     .Does(() =>
 {
     MSBuild(solutionFile, config => config
         .SetConfiguration(configuration)
         .WithTarget(buildTarget));
+});
+
+Task("NuGetRestore")
+	.Does(() =>
+{
+	NuGetRestore(solutionFile);
 });
 
 RunTarget(target);
