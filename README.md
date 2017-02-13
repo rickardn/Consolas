@@ -18,7 +18,7 @@ PM> Install-Package Consolas
 ##Simple example
 
 ```csharp
-class Program : ConsoleApp
+class Program : ConsoleApp<Program>
 {
     static void Main(string[] args)
     {
@@ -31,7 +31,7 @@ public class HelpArgs
     public bool Help { get; set; }
 }
 
-public class HelpCommand : Command<HelpCommand>
+public class HelpCommand : Command
 {
     public string Execute(HelpArgs args)
     {
