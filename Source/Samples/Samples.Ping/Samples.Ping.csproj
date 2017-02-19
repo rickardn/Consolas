@@ -69,6 +69,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="Views\Default.template" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Consolas.Razor\Consolas.Razor.csproj">
