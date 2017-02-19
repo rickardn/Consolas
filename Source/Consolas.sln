@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B558A4E9-8058-48C5-8BC4-0518755A5385}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\README.md = Samples\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consolas.Core", "ConsoleApp.Core\Consolas.Core.csproj", "{D5234497-2F14-45D8-A896-ECAA18C20EFF}"
 EndProject
@@ -66,7 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.editorconfig = ..\.editorconfig
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
-		..\LICENCE.md = ..\LICENCE.md
+		..\LICENSE.md = ..\LICENSE.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
