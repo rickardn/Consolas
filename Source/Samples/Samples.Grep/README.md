@@ -1,5 +1,5 @@
 ﻿# Grep sample app
-A classic Unit command - search plain-text data sets for lines matching a regular expression.
+A classic Unix command - search plain-text data sets for lines matching a regular expression.
 
 *The sample app only implements basic functionallity of the grep command.*
 
