@@ -41,7 +41,7 @@ Use the ```[DefaultArgument]``` attribute to have it match when there are no arg
 ```C#
 public class VersionArgs
 {
-	public bool Version { get; set; }
+  public bool Version { get; set; }
 }
 ```
 
@@ -50,13 +50,17 @@ public class VersionArgs
 public class GrepCommand : Command
 {
   public object Execute(GrepArgs args)
-{
+  { ...
+  }
+}
 ```
 ```C#
 public class VersionCommand : Command
 {
   public object Execute(VersionArgs args)
-{
+  { ...
+  }
+}
 ```
 
 ## Views
