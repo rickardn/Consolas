@@ -39,6 +39,7 @@ public class HelpCommand : Command
     }
 }
 ```
+![Consolas matching args](http://www.rickardnilsson.net/image.axd?picture=consolas-matching-args-to-command_2.png "Consolas matching args to command")
 
 ### Running the above program from a console
 
